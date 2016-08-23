@@ -1,0 +1,233 @@
+
+<%= form_for @alumno do |f| %>
+  <% if @alumno.errors.any? %>
+    <div id="error_explanation" class="alert alert-warning">
+      <h2>No se pudo guardar por <%= pluralize(@alumno.errors.count, "problema") %>:</h2>
+
+      <ul>
+      <% @alumno.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs text-right" role="tablist">
+    <li role="presentation" class="active"><a href="#alumno" aria-controls="alumno" role="tab" data-toggle="tab">Alumno</a></li>
+    <li role="presentation"><a href="#salud" aria-controls="salud" role="tab" data-toggle="tab">Salud</a></li>
+    <li role="presentation"><a href="#familia" aria-controls="familia" role="tab" data-toggle="tab">Familia</a></li>
+
+    <!-- BOTON -->
+    <%= f.submit "Guardar", class: 'btn btn-primary' %>
+
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- ALUMNO -->
+    <div role="tabpanel" class="tab-pane active" id="alumno">
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Nombre Alumno:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.text_field :nombres, placeholder: "Nombres", class: "form-control" %>
+        </div>
+        <div class="col-md-2">
+          <%= f.text_field :paterno, placeholder: "Apellido Paterno", class: "form-control"%>
+        </div>
+        <div class="col-md-2">
+          <%= f.text_field :materno, placeholder: "Apellido Materno", class: "form-control" %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>R.U.T:</h5>
+        </div>
+        <div class="col-md-2" id="error_rut">
+            <%= f.text_field :rut , placeholder: "XX.XXX.XXX-X", class: "form-control"%>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Fecha de Nacimiento:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.date_field :f_nacimiento, class: "form-control" %>
+        </div>
+        <div class="col-md-2">
+          <h5>Telefono:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.number_field :telefono, class: "form-control" %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Comuna:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.text_field :comuna, class: "form-control" %>
+        </div>
+        <div class="col-md-2">
+          <h5>Domicilio:</h5>
+        </div>
+        <div class="col-md-3">
+          <%= f.text_area :domicilio, class: "form-control" %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Colegio de Procedencia:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.text_field :procedencia, class: "form-control" %>
+        </div>
+        <div class="col-md-2">
+          <h5>Cursos Repetidos:</h5>
+        </div>
+        <div class="col-md-3">
+          <%= f.text_field :cur_repetidos, class: "form-control" %>
+        </div>
+      </div>
+      <br>
+    </div>
+
+
+    <!--  SALUD -->
+    <div role="tabpanel" class="tab-pane" id="salud">
+      <br>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+          <div class="form-group">
+            <div class="checkbox-inline">
+              <%= f.check_box :problema_medico %>
+              <%= f.label :problema_medico, 'Problema Medico' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-inline">
+              <%= f.check_box :problema_dental %>
+              <%= f.label :problema_dental, 'Problema Dental' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-inline">
+              <%= f.check_box :problema_audicion %>
+              <%= f.label :problema_audicion, 'Problema Audicion' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-inline">
+              <%= f.check_box :problema_vision %>
+              <%= f.label :problema_vision, 'Problema de Vision' %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Descripcion:</h5>
+        </div>
+        <div class="col-md-5">
+          <%= f.text_area :problema_descripcion, class: "form-control" %>
+          <br>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Alergia a algun medicamento(indicar):</h5>
+        </div>
+        <div class="col-md-5">
+          <%= f.text_area :alergia_medicamento, class: "form-control" %>
+        </div>
+        </br>
+      </div>
+
+
+    </div>
+
+    <!--  FAMILIA -->
+    <div role="tabpanel" class="tab-pane" id="familia">
+      <br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1 text-left">
+          <h5>Tipo de vivienda:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :tipo_vivienda, [['Propia'], ['Cedida'], ['Arrendada']],
+          {:include_blank => true}, {class: "form-control"} %>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Numero de Personas:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :numero_personas, 1..15, {:include_blank => true}, {class: "form-control"} %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1 text-left">
+          <h5>Numero de Hermanos:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :numero_hermanos, 0..15, {:include_blank => true}, {class: "form-control"} %>
+        </div>
+
+        <div class="col-md-2 text-left">
+          <h5>Lugar que ocupa:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :posicion_familia, 1..15, {:include_blank => true}, {class: "form-control"} %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1 text-left">
+          <h5>Vive Con:</h5>
+        </div>
+        <div class="col-md-2">
+          <div class="radio-inline">
+            <!-- ORDEN radio -> label -->
+            <%= f.radio_button :vive_con, "Padre" %>
+            <%= f.label :vive_con, "Padre", :value => "Padre"  %>
+            <%= f.radio_button :vive_con, "Madre" %>
+            <%= f.label :vive_con, "Madre", :value => "Madre" %>
+            <%= f.radio_button :vive_con, "Abuelos" %>
+            <%= f.label :vive_con, "Abuelos", :value => "Abuelos" %>
+            <%= f.radio_button :vive_con, "Padres" %>
+            <%= f.label :vive_con, "Padres", :value => "Padres" %>
+            <%= f.radio_button :vive_con, "Otro" %>
+            <%= f.label :vive_con, "Otro", :value => "Otro" %>
+            <input id="input_otro" type="text" class="form-control" value="<%= @alumno.vive_con %>" disabled>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </div>
+<br><br>
+
+
+<% end %>

@@ -1,0 +1,29 @@
+
+<div class="text-center">
+  <h1>
+    Lista Alumnos
+    <%= link_to 'Nuevo Alumno', new_alumno_path, :class => "btn btn-success" %>
+  </h1>
+</div>
+
+<br>
+<div class="col-md-6">
+  <table class="table table-hover">
+
+
+    <tbody>
+      <% @alumnos.each do |alumno| %>
+        <tr>
+          <td><%= "#{alumno.nombres}  #{alumno.paterno} #{alumno.materno}" %></td>
+          <td><%= alumno.rut %></td>
+          <td><%= alumno.telefono %></td>
+
+          <td><%= link_to 'Show', alumno %></td>
+          <td><%= link_to 'Edit', edit_alumno_path(alumno) %></td>
+          <td><%= link_to 'Destroy', alumno, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
