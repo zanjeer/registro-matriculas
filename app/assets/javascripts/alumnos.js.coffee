@@ -8,12 +8,35 @@ $(document).on 'turbolinks:load', ->
   # alumno/_form -> tab ALUMNO
   $('#alumno_rut').Rut
     on_error: ->
-      $('#error_rut').addClass('has-error')
+      $('#error_rut').addClass('has-error').removeClass('has-success')
       return
     on_success: ->
-      $('#error_rut').addClass('has-success')
+      $('#error_rut').addClass('has-success').removeClass('has-error')
       return
 
+  $('#alumno_madre_rut').Rut
+    on_error: ->
+      $('#error_rut_madre').addClass('has-error').removeClass('has-success')
+      return
+    on_success: ->
+      $('#error_rut_madre').addClass('has-success').removeClass('has-error')
+      return
+
+  $('#alumno_padre_rut').Rut
+    on_error: ->
+      $('#error_rut_padre').addClass('has-error').removeClass('has-success')
+      return
+    on_success: ->
+      $('#error_rut_padre').addClass('has-success').removeClass('has-error')
+      return
+
+  $('#alumno_apoderado_rut').Rut
+    on_error: ->
+      $('#error_rut_apo').addClass('has-error').removeClass('has-success')
+      return
+    on_success: ->
+      $('#error_rut_apo').addClass('has-success').removeClass('has-error')
+      return
   # TRUE = vive_con_OTRO
   # alumno/_form -> tab FAMILIA
   es_otro = (valor) ->

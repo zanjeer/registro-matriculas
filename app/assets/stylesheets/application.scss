@@ -15,6 +15,7 @@
 @import "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "alumnos";
 
 body{
   margin-top: 60px;
@@ -50,19 +51,4 @@ body{
   margin-right: 10px;
   color: #eee;
   text-decoration: none;
-}
-
-/* center nab tabs */
-.nav-tabs > li, .nav-pills > li {
-    float:none;
-    display:inline-block;
-}
-
-.nav-tabs {
-    text-align:center;
-}
-
-label {
-    font-weight: normal !important;
-    display: block !important; margin-bottom: 8px;
 }

@@ -73,7 +73,10 @@ class AlumnosController < ApplicationController
       :f_nacimiento, :telefono, :domicilio, :comuna, :procedencia, :cur_repetidos,
       :problema_audicion, :problema_dental, :problema_vision, :problema_medico,
       :problema_descripcion, :alergia_medicamento, :vive_con, :posicion_familia,
-      :numero_hermanos, :numero_personas, :tipo_vivienda,
+      :numero_hermanos, :numero_personas, :tipo_vivienda, :madre_rut, :madre_nombre,
+      :madre_ocupacion, :madre_direccion, :madre_escolaridad, :padre_rut, :padre_nombre,
+      :padre_ocupacion, :padre_direccion, :padre_escolaridad, :apoderado_rut, :apoderado_nombre,
+      :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad,
       )
     end
 end

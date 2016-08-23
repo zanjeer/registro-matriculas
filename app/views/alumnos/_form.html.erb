@@ -84,7 +84,7 @@
         <div class="col-md-2">
           <h5>Domicilio:</h5>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <%= f.text_area :domicilio, class: "form-control" %>
         </div>
       </div>
@@ -100,7 +100,7 @@
         <div class="col-md-2">
           <h5>Cursos Repetidos:</h5>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <%= f.text_field :cur_repetidos, class: "form-control" %>
         </div>
       </div>
@@ -205,24 +205,184 @@
         <div class="col-md-2 col-md-offset-1 text-left">
           <h5>Vive Con:</h5>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
           <div class="radio-inline">
             <!-- ORDEN radio -> label -->
             <%= f.radio_button :vive_con, "Padre" %>
             <%= f.label :vive_con, "Padre", :value => "Padre"  %>
             <%= f.radio_button :vive_con, "Madre" %>
             <%= f.label :vive_con, "Madre", :value => "Madre" %>
-            <%= f.radio_button :vive_con, "Abuelos" %>
-            <%= f.label :vive_con, "Abuelos", :value => "Abuelos" %>
             <%= f.radio_button :vive_con, "Padres" %>
             <%= f.label :vive_con, "Padres", :value => "Padres" %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="radio-inline">
+            <%= f.radio_button :vive_con, "Abuelos" %>
+            <%= f.label :vive_con, "Abuelos", :value => "Abuelos" %>
             <%= f.radio_button :vive_con, "Otro" %>
             <%= f.label :vive_con, "Otro", :value => "Otro" %>
             <input id="input_otro" type="text" class="form-control" value="<%= @alumno.vive_con %>" disabled>
           </div>
         </div>
+      </div>
+      <!-- SEPARADORX -->
+      <hr>
+
+      <div class="row">
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <legend>Datos de la Madre:</legend>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Nombre:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :madre_nombre, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>RUT:</h5>
+              </div>
+              <div class="col-md-8" id="error_rut_madre">
+                <%= f.text_field :madre_rut, placeholder: "XX.XXX.XXX-X", class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Ocupacion:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :madre_ocupacion, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Escolaridad:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :madre_escolaridad, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Direccion:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_area :madre_direccion, class: "form-control" %>
+              </div>
+            </div>
+
+
+            <br>
+          </div>
+
+          <div class="col-md-3">
+            <legend>Datos del Padre:</legend>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Nombre:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :padre_nombre, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>RUT:</h5>
+              </div>
+              <div class="col-md-8" id="error_rut_padre">
+                <%= f.text_field :padre_rut, placeholder: "XX.XXX.XXX-X", class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Ocupacion:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :padre_ocupacion, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Escolaridad:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :padre_escolaridad, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Direccion:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_area :padre_direccion, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <legend>Datos del Apoderado:</legend>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Nombre:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :apoderado_nombre, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>RUT:</h5>
+              </div>
+              <div class="col-md-8" id="error_rut_apo">
+                <%= f.text_field :apoderado_rut, placeholder: "XX.XXX.XXX-X", class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Ocupacion:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :apoderado_ocupacion, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Escolaridad:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :apoderado_escolaridad, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Direccion:</h5>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_area :apoderado_direccion, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
 
       </div>
+
     </div>
   </div>
 
