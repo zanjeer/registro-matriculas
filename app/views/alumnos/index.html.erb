@@ -5,9 +5,20 @@
       <%= link_to 'Nuevo Alumno', new_alumno_path, :class => "btn btn-success" %>
     </h1>
 
-    <button type="button" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
-    </button>
+    <div class="row">
+      <%= form_tag(alumnos_path, :method => "get", id: "search-form") do %>
+        <!-- text field tag=action,args,identifier,placeholdertext... -->
+        <div class="col-md-10">
+          <%= text_field_tag :search, params[:search], class: "search-query form-control",
+          placeholder: "Nombre Alumno", type: "search", fields: { nombres: "#nombres", rut: "#rut" },
+          data: {autocomplete: alumnos_autocomplete_alumno_nombres_path} %>
+        </div>
+        <div class="col-md-2">
+          <%= submit_tag "Buscar", class: "btn btn-default" %>
+        </div>
+      <%end%>
+    </div>
+
 
 
   </div>
@@ -20,7 +31,7 @@
       <th colspan="3"></th>
     </tr>
 
-    <tbody>
+    <tbody id="alum_body">
       <% @alumnos.each do |alumno| %>
         <tr>
           <td><%= "#{alumno.nombres.upcase}  #{alumno.paterno.upcase} #{alumno.materno.upcase}" %></td>

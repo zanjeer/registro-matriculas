@@ -10,8 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery-3.1.0.min
+//= require jquery
 //= require jquery_ujs
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
 //= require jquery.turbolinks
 //= require turbolinks
 //= require_tree .

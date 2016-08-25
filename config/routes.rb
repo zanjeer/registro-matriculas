@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :alumnos
   root 'alumnos#index'
+    get 'alumnos/autocomplete_alumno_nombres'
+      resources :alumnos
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

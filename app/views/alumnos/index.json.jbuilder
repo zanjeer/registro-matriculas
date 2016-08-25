@@ -1,1 +1,4 @@
-json.array! @alumnos, partial: 'alumnos/alumno', as: :alumno
+json.array!(@alumnos) do |alumno|
+  json.extract! alumno, :id, :nombres
+  json.url alumno_url(alumno, format: :json)
+end
