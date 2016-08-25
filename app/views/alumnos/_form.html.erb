@@ -55,6 +55,16 @@
         <div class="col-md-2" id="error_rut">
             <%= f.text_field :rut , placeholder: "XX.XXX.XXX-X", class: "form-control"%>
         </div>
+
+        <div class="col-md-2 text-left">
+          <h5>Genero:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :genero, [['Masculino'], ['Femenino']],
+          {:include_blank => true}, {class: "form-control"} %>
+        </div>
+
+
       </div>
       <br>
 
@@ -88,8 +98,7 @@
           <%= f.text_area :domicilio, class: "form-control" %>
         </div>
       </div>
-      <br>
-
+      <hr>
       <div class="row">
         <div class="col-md-3 col-md-offset-1 text-left">
           <h5>Colegio de Procedencia:</h5>
@@ -105,6 +114,62 @@
         </div>
       </div>
       <br>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Curso:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :curso, [['Pre-Kinder'], ['Kinder'],
+                                ['1° A'], ['1° B'], ['2° A'], ['2° B'],
+                                ['3° A'], ['3° B'], ['4° A'], ['4° B'],
+                                ['5° A'], ['5° B'], ['6° A'], ['6° B'],
+                                ['7° A'], ['7° B'], ['8° A'], ['8° B'], ],
+          {:include_blank => true}, {class: "form-control"} %>
+        </div>
+
+        <div class="col-md-2 text-left">
+          <h5>Subencion:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :subencion, [['Prioritario'], ['Preferente'], ['Solo Regular']],
+          {:include_blank => true}, {class: "form-control"} %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <h5>Fecha de Incorporacion:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.date_field :fecha_incorp, class: "form-control" %>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Problema Aprendizaje?:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :problema_aprendizaje, [['Si'], ['No']],
+          {:include_blank => true}, {class: "form-control"} %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <h5>Fecha de Retiro:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.date_field :fecha_retiro, class: "form-control" %>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Causa de Retiro:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.text_area :causa_retiro, {class: "form-control"} %>
+        </div>
+      </div>
     </div>
 
 
@@ -225,7 +290,55 @@
             <input id="input_otro" type="text" class="form-control" value="<%= @alumno.vive_con %>" disabled>
           </div>
         </div>
+
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Subsidio Familiar:</h5>
+        </div>
+        <div class="col-md-2">
+          <div class="radio-inline">
+            <%= f.radio_button :subsidio_familiar, "true" %>
+            <%= f.label :subsidio_familiar, "Si", :value => true  %>
+            <%= f.radio_button :subsidio_familiar, "false" %>
+            <%= f.label :subsidio_familiar, "No", :value => false %>
+          </div>
+        </div>
       </div>
+      <br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Sistema de Salud:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :sistema_salud, [['Fonasa'], ['Isapre'], ['Particular'], ['Sin sistema']],
+          {:include_blank => true}, {class: "form-control"} %>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Ingreso Grupo Familiar:</h5>
+        </div>
+        <div class="col-md-2">
+          <%=  f.number_field :ingreso_familiar, class: "form-control" %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Necesita Alimntacion?:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :necesita_alimento, [['Si'], ['No']],{}, class: "form-control" %>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Ficha Proteccion social:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :protec_social, [['Si'], ['No']],
+          {}, class: "form-control" %>
+        </div>
+
+      </div>
+
       <!-- SEPARADORX -->
       <hr>
 
@@ -377,11 +490,11 @@
               </div>
             </div>
           </div>
-
         </div>
 
-
       </div>
+      <!-- fin datos padre,madre,apode -->
+
 
     </div>
   </div>

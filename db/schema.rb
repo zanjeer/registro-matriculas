@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822200948) do
+ActiveRecord::Schema.define(version: 20160825184818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(version: 20160822200948) do
     t.text     "apoderado_ocupacion"
     t.string   "apoderado_escolaridad"
     t.text     "apoderado_direccion"
+    t.boolean  "subsidio_familiar"
+    t.string   "subencion"
+    t.string   "sistema_salud"
+    t.string   "genero"
+    t.string   "curso"
+    t.date     "fecha_incorp"
+    t.string   "problema_aprendizaje"
+    t.date     "fecha_retiro"
+    t.text     "causa_retiro"
+    t.integer  "ingreso_familiar"
+    t.string   "necesita_alimento"
+    t.string   "protec_social"
   end
 
   create_table "comments", force: true do |t|

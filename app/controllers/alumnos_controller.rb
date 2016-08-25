@@ -76,7 +76,9 @@ class AlumnosController < ApplicationController
       :numero_hermanos, :numero_personas, :tipo_vivienda, :madre_rut, :madre_nombre,
       :madre_ocupacion, :madre_direccion, :madre_escolaridad, :padre_rut, :padre_nombre,
       :padre_ocupacion, :padre_direccion, :padre_escolaridad, :apoderado_rut, :apoderado_nombre,
-      :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad,
+      :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad, :subsidio_familiar,
+      :subencion, :sistema_salud, :genero, :curso, :fecha_incorp, :problema_aprendizaje,
+      :fecha_retiro, :causa_retiro, :ingreso_familiar, :necesita_alimento, :protec_social
       )
     end
 end

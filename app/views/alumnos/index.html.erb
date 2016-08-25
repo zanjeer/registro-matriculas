@@ -1,29 +1,47 @@
-
-<div class="text-center">
-  <h1>
-    Lista Alumnos
-    <%= link_to 'Nuevo Alumno', new_alumno_path, :class => "btn btn-success" %>
-  </h1>
-</div>
-
-<br>
 <div class="col-md-6">
-  <table class="table table-hover">
+  <div class="text-center">
+    <h1>
+      Lista Alumnos
+      <%= link_to 'Nuevo Alumno', new_alumno_path, :class => "btn btn-success" %>
+    </h1>
 
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+    </button>
+
+
+  </div>
+  <br>
+  <table class="table table-hover">
+    <tr  class="success">
+      <th>Nombre</th>
+      <th>Rut</th>
+      <th>Telefono</th>
+      <th colspan="3"></th>
+    </tr>
 
     <tbody>
       <% @alumnos.each do |alumno| %>
         <tr>
-          <td><%= "#{alumno.nombres}  #{alumno.paterno} #{alumno.materno}" %></td>
+          <td><%= "#{alumno.nombres.upcase}  #{alumno.paterno.upcase} #{alumno.materno.upcase}" %></td>
           <td><%= alumno.rut %></td>
           <td><%= alumno.telefono %></td>
 
-          <td><%= link_to 'Show', alumno %></td>
-          <td><%= link_to 'Edit', edit_alumno_path(alumno) %></td>
-          <td><%= link_to 'Destroy', alumno, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Ver', alumno %></td>
+          <td><%= link_to 'Editar', edit_alumno_path(alumno) %></td>
+          <td><%= link_to 'Eliminar', alumno, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<div class="col-md-6">
+  <div class="text-center">
+    <h1>
+      Lista Informes
+    </h1>
+  </div>
+</div>
+
 <br>
