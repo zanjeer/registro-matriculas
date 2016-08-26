@@ -12,7 +12,7 @@ class AlumnosController < ApplicationController
     result = Alumno.nombre_like("%#{params[:term]}%",
                                 "%#{params[:term]}%",
                                 "%#{params[:term]}%").order('nombres')
-                                
+
     render json: result.map { |alumno| {id: alumno.id,
                               label: "#{alumno.rut} - #{alumno.nombres.upcase} #{alumno.paterno.upcase} #{alumno.materno.upcase} ",
                               value: alumno.nombres,
@@ -82,7 +82,7 @@ class AlumnosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def alumno_params
-      params.require(:alumno).permit(:nombres, :materno, :paterno, :rut,
+      params.require(:alumno).permit(:nombres, :materno, :paterno, :rut, :genero,
       :f_nacimiento, :telefono, :domicilio, :comuna, :procedencia, :cur_repetidos,
       :problema_audicion, :problema_dental, :problema_vision, :problema_medico,
       :problema_descripcion, :alergia_medicamento, :vive_con, :posicion_familia,
@@ -90,7 +90,7 @@ class AlumnosController < ApplicationController
       :madre_ocupacion, :madre_direccion, :madre_escolaridad, :padre_rut, :padre_nombre,
       :padre_ocupacion, :padre_direccion, :padre_escolaridad, :apoderado_rut, :apoderado_nombre,
       :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad, :subsidio_familiar,
-      :subencion, :sistema_salud, :genero, :curso, :fecha_incorp, :problema_aprendizaje,
+      :subencion, :sistema_salud, :curso, :fecha_incorp, :problema_aprendizaje,
       :fecha_retiro, :causa_retiro, :ingreso_familiar, :necesita_alimento, :protec_social
       )
     end
