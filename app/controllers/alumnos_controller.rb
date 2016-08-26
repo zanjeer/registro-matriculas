@@ -9,14 +9,15 @@ class AlumnosController < ApplicationController
   end
 
   def autocomplete_alumno_nombres
-    nombres = params[:nombres]
-    paterno = params[:paterno]
-    materno = params[:materno]
-    rut = params[:rut]
+    result = Alumno.nombre_like("%#{params[:term]}%",
+                                "%#{params[:term]}%",
+                                "%#{params[:term]}%").order('nombres')
+                                
+    render json: result.map { |alumno| {id: alumno.id,
+                              label: "#{alumno.rut} - #{alumno.nombres.upcase} #{alumno.paterno.upcase} #{alumno.materno.upcase} ",
+                              value: alumno.nombres,
+                            }}
 
-    # resultado = Food.name_like("%#{params[:search]}%").order('name')
-    # result = AcademicTitleSuggestion.joins(:country).where('countries.name = ? AND academic_title_suggestions.title LIKE ?', country, "%#{title}%").order(:title)
-    # render json: titles.map { |title| { id: title.id, label: title.title, value: title.title } }
   end
 
   # GET /alumnos/1
