@@ -1,44 +1,446 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nombres:</strong>
-  <%= @alumno.nombres %>
-</p>
+<% if flash[:notice] -%>
+  <div class = "alert alert-success"><%= flash[:notice] %></div>
+<% end %>
 
-<p>
-  <strong>Materno:</strong>
-  <%= @alumno.materno %>
-</p>
+<div class="col-md-12 text-center">
+  <h3>
+    <%= link_to 'Atras', alumnos_path, class: 'btn btn-warning' %>
+    <%= @alumno.nombre_completo %>
+  </h3>
+  <br>
+</div>
 
-<p>
-  <strong>Paterno:</strong>
-  <%= @alumno.paterno %>
-</p>
 
-<p>
-  <strong>Rut:</strong>
-  <%= @alumno.rut %>
-</p>
+  <div>
 
-<p>
-  <strong>F nacimiento:</strong>
-  <%= @alumno.f_nacimiento %>
-</p>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs text-right" role="tablist">
+    <li role="presentation" class="active"><a href="#alumno" aria-controls="alumno" role="tab" data-toggle="tab">Alumno</a></li>
+    <li role="presentation"><a href="#salud" aria-controls="salud" role="tab" data-toggle="tab">Salud</a></li>
+    <li role="presentation"><a href="#familia" aria-controls="familia" role="tab" data-toggle="tab">Familia</a></li>
 
-<p>
-  <strong>Telefono:</strong>
-  <%= @alumno.telefono %>
-</p>
+    <!-- BOTON -->
+    <%= link_to 'Editar', edit_alumno_path(@alumno), class: 'btn btn-primary' %>
 
-<p>
-  <strong>Domicilio:</strong>
-  <%= @alumno.domicilio %>
-</p>
 
-<p>
-  <strong>Comuna:</strong>
-  <%= @alumno.comuna %>
-</p>
+  </ul>
 
-<%= link_to 'Edit', edit_alumno_path(@alumno) %> |
-<%= link_to 'Back', alumnos_path %>
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- ALUMNO -->
+    <div role="tabpanel" class="tab-pane active" id="alumno">
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Nombre Alumno:</h5>
+        </div>
+        <div class="col-md-5">
+          <h5><%= @alumno.nombre_completo %></h5>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>R.U.T:</h5>
+        </div>
+        <div class="col-md-2" id="error_rut">
+            <h5><%= @alumno.rut %></h5>
+        </div>
+
+        <div class="col-md-2 text-left">
+          <h5>Genero:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.genero %></h5>
+        </div>
+
+
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Fecha de Nacimiento:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.f_nacimiento %></h5>
+        </div>
+        <div class="col-md-2">
+          <h5>Telefono:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.telefono %></h5>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Comuna:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.comuna %></h5>
+        </div>
+        <div class="col-md-2">
+          <h5>Domicilio:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.domicilio %></h5>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Colegio de Procedencia:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.procedencia %></h5>
+        </div>
+        <div class="col-md-2">
+          <h5>Cursos Repetidos:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.cur_repetidos %></h5>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-left">
+          <h5>Curso:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.curso %></h5>
+        </div>
+
+        <div class="col-md-2 text-left">
+          <h5>Subencion:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.subencion %></h5>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <h5>Fecha de Incorporacion:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.fecha_incorp %></h5>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Problema Aprendizaje?:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= human_boolean(@alumno.problema_aprendizaje) %></h5>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <h5>Fecha de Retiro:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.fecha_retiro %></h5>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Causa de Retiro:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.causa_retiro %></h5>
+        </div>
+      </div>
+    </div>
+
+
+    <!--  SALUD -->
+    <div role="tabpanel" class="tab-pane" id="salud">
+      <br>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+            <h5>Problema Medico?: <%= human_boolean(@alumno.problema_medico) %></h5>
+            <br>
+            <h5>Problema Dental?: <%= human_boolean(@alumno.problema_dental) %></h5>
+            <br>
+            <h5>Problema Audicion?: <%= human_boolean(@alumno.problema_audicion) %></h5>
+            <br>
+            <h5>Problema Vision?: <%= human_boolean(@alumno.problema_vision) %></h5>
+
+        </div>
+
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Descripcion:</h5>
+        </div>
+        <div class="col-md-5">
+            <h5><%= @alumno.problema_descripcion %></h5>
+          <br>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Alergia a algun medicamento(indicar):</h5>
+        </div>
+        <div class="col-md-5">
+            <h5><%= @alumno.alergia_medicamento %></h5>
+        </div>
+        </br>
+      </div>
+
+
+    </div>
+
+    <!--  FAMILIA -->
+    <div role="tabpanel" class="tab-pane" id="familia">
+      <br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1 text-left">
+          <h5>Tipo de vivienda:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.tipo_vivienda %></h5>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Numero de Personas:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.numero_personas %></h5>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1 text-left">
+          <h5>Numero de Hermanos:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.numero_hermanos %></h5>
+        </div>
+
+        <div class="col-md-2 text-left">
+          <h5>Lugar que ocupa:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.posicion_familia %></h5>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1 text-left">
+          <h5>Vive Con:</h5>
+        </div>
+        <div class="col-md-1">
+            <h5><%= @alumno.vive_con %></h5>
+        </div>
+
+
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Subsidio Familiar:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= human_boolean(@alumno.subsidio_familiar) %></h5>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Sistema de Salud:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.sistema_salud %></h5>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Ingreso Grupo Familiar:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.ingreso_familiar %></h5>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Necesita Alimntacion?:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= human_boolean(@alumno.necesita_alimento) %></h5>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Ficha Proteccion social:</h5>
+        </div>
+        <div class="col-md-2">
+            <h5><%= @alumno.protec_social %></h5>
+        </div>
+
+      </div>
+
+      <!-- SEPARADORX -->
+      <hr>
+
+      <div class="row">
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <legend>Datos de la Madre:</legend>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Nombre:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.madre_nombre %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>RUT:</h5>
+              </div>
+              <div class="col-md-8" id="error_rut_madre">
+                  <h5><%= @alumno.madre_rut %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Ocupacion:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.madre_ocupacion %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Escolaridad:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.madre_escolaridad %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Direccion:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.madre_direccion %></h5>
+              </div>
+            </div>
+
+
+            <br>
+          </div>
+
+          <div class="col-md-3">
+            <legend>Datos del Padre:</legend>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Nombre:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.padre_nombre %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>RUT:</h5>
+              </div>
+              <div class="col-md-8" id="error_rut_padre">
+                  <h5><%= @alumno.padre_rut %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Ocupacion:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.padre_ocupacion %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Escolaridad:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.padre_escolaridad %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Direccion:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.padre_direccion %></h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <legend>Datos del Apoderado:</legend>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Nombre:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.apoderado_nombre %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>RUT:</h5>
+              </div>
+              <div class="col-md-8" id="error_rut_apo">
+                  <h5><%= @alumno.apoderado_rut %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Ocupacion:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.apoderado_ocupacion %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Escolaridad:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.apoderado_escolaridad %></h5>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <h5>Direccion:</h5>
+              </div>
+              <div class="col-md-8">
+                  <h5><%= @alumno.apoderado_direccion %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- fin datos padre,madre,apode -->
+
+
+    </div>
+  </div>
+
+  </div>
+<br><br>

@@ -68,3 +68,8 @@ $(document).on 'turbolinks:load', ->
     $('#alumno_vive_con_otro').val(@value)
     console.log(@value)
   return
+
+# $('#buscar_id').bind 'railsAutocomplete.select', (event, data) ->
+#   ### Do something here ###
+#   alert data.item.id
+#   return

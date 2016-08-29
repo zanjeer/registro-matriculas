@@ -1,23 +1,34 @@
 class AlumnosController < ApplicationController
   before_action :set_alumno, only: [:show, :edit, :update, :destroy]
-  autocomplete :alumno, :nombres, :extra_data => [:rut]
+  autocomplete :alumno, :nombres, :full => true
 
   # GET /alumnos
   # GET /alumnos.json
   def index
     @alumnos = Alumno.all
+    if params[:search]
+      @alumnos = Alumno.nombre_like("%#{params[:search]}%",
+                                  "%#{params[:search]}%",
+                                  "%#{params[:search]}%",
+                                  "%#{params[:search]}%").order('nombres')
+
+
+    else
+    end
   end
 
   def autocomplete_alumno_nombres
-    result = Alumno.nombre_like("%#{params[:term]}%",
+    @result = Alumno.nombre_like("%#{params[:term]}%",
                                 "%#{params[:term]}%",
+                                "%#{params[:search]}%",
                                 "%#{params[:term]}%").order('nombres')
 
-    render json: result.map { |alumno| {id: alumno.id,
-                              label: "#{alumno.rut} - #{alumno.nombres.upcase} #{alumno.paterno.upcase} #{alumno.materno.upcase} ",
-                              value: alumno.nombres,
+    render json: @result.map { |alumno| {alumno: alumno.id,
+                              label: "#{alumno.rut} - #{alumno.nombre_completo}",
+                              value: alumno.rut,
+                              nombre: alumno.nombre_completo, rut: alumno.rut,
+                              fono: alumno.telefono,
                             }}
-
   end
 
   # GET /alumnos/1

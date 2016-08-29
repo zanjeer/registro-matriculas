@@ -15,7 +15,7 @@
 @import "bootstrap";
 @import "alumnos";
 
-
+.ui-helper-hidden-accessible { display:none; }
 body{
   margin-top: 60px;
   background-color: #f1f1f1;
