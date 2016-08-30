@@ -61,8 +61,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_portile2 (2.0.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
     polyglot (0.3.5)
     rack (1.5.5)
@@ -138,6 +141,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  nokogiri
   pg
   rails (= 4.1.0)
   rails-jquery-autocomplete

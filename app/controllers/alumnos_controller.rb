@@ -1,16 +1,113 @@
 class AlumnosController < ApplicationController
   before_action :set_alumno, only: [:show, :edit, :update, :destroy]
-  autocomplete :alumno, :nombres, :full => true
+  autocomplete :alumno, :nombres
+
+  # tipo_ense 10 = parbularia, 110= basica
+  def xml_file
+    if params[:file]
+      uploaded_file = params[:file]
+      file_content = uploaded_file.read
+      # Nokogiri.XML(file_content, nil, 'UTF-8')
+      doc  = Nokogiri::XML(file_content)
+      # funciona
+      # se recore por tipo de enseñanza
+      doc.css("tipo_ensenanza").each do |nodo_ens|
+        # pre basica 4 = pre Kinder /// 5 = Kinder
+        if nodo_ens['codigo'] == '10'
+          # se recorren los cursos
+          nodo_ens.css("curso").each do |nodo_curso|
+            if nodo_curso['grado'] == '4'
+              @grado = 'Pre-Kinder'
+            elsif nodo_curso['grado'] == '5'
+              @grado = 'Kinder'
+            end
+            @curso = "#{@grado}° #{nodo_curso['letra']}"
+
+            # se recorre la lista de alumnos del curso
+            nodo_curso.css("alumno").each do |nodo_alumno|
+              @genero = "Masculino"
+              if nodo_alumno['genero'].downcase == "f"
+                @genero = "Femenino"
+              end
+
+              Alumno.create(
+                nombres: "#{nodo_alumno['nombres']}",
+                paterno: nodo_alumno['ape_paterno'],
+                materno: nodo_alumno['ape_materno'],
+                domicilio: nodo_alumno['direccion'],
+                rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                genero: @genero,
+                curso: @curso,
+                telefono: nodo_alumno['telefono'],
+                fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
+                fecha_retiro: nodo_alumno['fecha_retiro'],
+                f_nacimiento: nodo_alumno['fecha_nacimiento'],
+                madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+              )
+
+            end
+
+          end
+        elsif nodo_ens["codigo"] == '110'
+          # se recorren los cursos
+          nodo_ens.css("curso").each do |nodo_curso|
+            @curso = "#{nodo_curso['grado']}° #{nodo_curso['letra']}"
+            # se recorre la lista de alumnos del curso
+            nodo_curso.css("alumno").each do |nodo_alumno|
+              @genero = "Masculino"
+              if nodo_alumno['genero'].downcase == "f"
+                @genero = "Femenino"
+              end
+
+              Alumno.create(
+                nombres: "#{nodo_alumno['nombres']}",
+                paterno: nodo_alumno['ape_paterno'],
+                materno: nodo_alumno['ape_materno'],
+                domicilio: nodo_alumno['direccion'],
+                rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                genero: @genero,
+                curso: @curso,
+                telefono: nodo_alumno['telefono'],
+                fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
+                fecha_retiro: nodo_alumno['fecha_retiro'],
+                f_nacimiento: nodo_alumno['fecha_nacimiento'],
+                madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+              )
+            end
+
+          end
+        end
+      end
+
+      # funciona
+      # @pre_basica.css("curso").each do |node|
+      #   @a = "#{node['grado']}° #{node['letra']}"
+
+
+      # end
+      # render xml: @colegio
+      # @doc.xpath("//curso//alumno").attr("nombres")
+    else
+      redirect_to alumnos_url, notice: 'Seleccione un archivo'
+    end
+
+  end
+
 
   # GET /alumnos
   # GET /alumnos.json
   def index
-    @alumnos = Alumno.all
+    @alumnos = Alumno.all.order('id')
     if params[:search]
-      @alumnos = Alumno.nombre_like("%#{params[:search]}%",
-                                  "%#{params[:search]}%",
-                                  "%#{params[:search]}%",
-                                  "%#{params[:search]}%").order('nombres')
+      @alumnos = Alumno.nombre_like("%#{params[:search].upcase}%",
+                                  "%#{params[:search].upcase}%",
+                                  "%#{params[:search].upcase}%",
+                                  "%#{params[:search].upcase}%",
+                                  "%#{params[:search].upcase}%").order('nombres')
 
 
     else
@@ -18,13 +115,14 @@ class AlumnosController < ApplicationController
   end
 
   def autocomplete_alumno_nombres
-    @result = Alumno.nombre_like("%#{params[:term]}%",
-                                "%#{params[:term]}%",
-                                "%#{params[:search]}%",
-                                "%#{params[:term]}%").order('nombres')
+    @result = Alumno.nombre_like("%#{params[:term].upcase}%",
+                                "%#{params[:term].upcase}%",
+                                "%#{params[:term].upcase}%",
+                                "%#{params[:term].upcase}%",
+                                "%#{params[:term].upcase}%").order('nombres')
 
     render json: @result.map { |alumno| {alumno: alumno.id,
-                              label: "#{alumno.rut} - #{alumno.nombre_completo}",
+                              label: "#{alumno.rut} - #{alumno.nombre_completo} - #{alumno.curso}",
                               value: alumno.rut,
                               nombre: alumno.nombre_completo, rut: alumno.rut,
                               fono: alumno.telefono,
