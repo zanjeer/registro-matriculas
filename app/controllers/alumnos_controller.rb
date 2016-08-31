@@ -2,142 +2,46 @@ class AlumnosController < ApplicationController
   before_action :set_alumno, only: [:show, :edit, :update, :destroy]
   autocomplete :alumno, :nombres
 
-  # tipo_ense 10 = parbularia, 110= basica
+  # subir matricula del sige con archivo xml
   def xml_file
     if params[:file]
       uploaded_file = params[:file]
       file_content = uploaded_file.read
-      # Nokogiri.XML(file_content, nil, 'UTF-8')
-      doc  = Nokogiri::XML(file_content)
-      # funciona
-      # se recore por tipo de enseñanza
+      doc  = Nokogiri::XML(file_content) # (content , nil, 'UTF-8')
+      # tipo_enseñanza: 10 = parbularia, 110 = basica
       doc.css("tipo_ensenanza").each do |nodo_ens|
-        # pre basica 4 = pre Kinder /// 5 = Kinder
+        # si es parbularia
         if nodo_ens['codigo'] == '10'
           # se recorren los cursos
           nodo_ens.css("curso").each do |nodo_curso|
             if nodo_curso['grado'] == '4'
-              @grado = 'Pre-Kinder'
+              @curso = "Pre-Kinder #{nodo_curso['letra']}"
             elsif nodo_curso['grado'] == '5'
-              @grado = 'Kinder'
+              @curso = "Kinder #{nodo_curso['letra']}"
             end
-            @curso = "#{@grado} #{nodo_curso['letra']}"
-
             # se recorre la lista de alumnos del curso
+            # si el alumno existe de actualiza
             nodo_curso.css("alumno").each do |nodo_alumno|
-              @genero = "Masculino"
-              if nodo_alumno['genero'].downcase == "f"
-                @genero = "Femenino"
-              end
-              @rut = "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}"
-
-
-              @alum = Alumno.find_by "rut = ?", @rut
-
-              if( @alum )
-                # actualizar info del alumno
-                @alum.update_attributes(
-                  nombres: nodo_alumno['nombres'],
-                  paterno: nodo_alumno['ape_paterno'],
-                  materno: nodo_alumno['ape_materno'],
-                  domicilio: nodo_alumno['direccion'],
-                  rut: @rut,
-                  genero: @genero,
-                  curso: @curso,
-                  telefono: nodo_alumno['telefono'],
-                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
-                  fecha_retiro: nodo_alumno['fecha_retiro'],
-                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
-                )
-                @alum.save
-              else
-                # si no  alum se crea el alumno nuevo
-                Alumno.create(
-                  nombres: "#{nodo_alumno['nombres']}",
-                  paterno: nodo_alumno['ape_paterno'],
-                  materno: nodo_alumno['ape_materno'],
-                  domicilio: nodo_alumno['direccion'],
-                  rut: @rut,
-                  genero: @genero,
-                  curso: @curso,
-                  telefono: nodo_alumno['telefono'],
-                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
-                  fecha_retiro: nodo_alumno['fecha_retiro'],
-                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
-                  madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                  padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                  apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                )
-              end
-
+              matricular_alumno(nodo_alumno,@curso)
             end
-
           end
         elsif nodo_ens["codigo"] == '110'
-          # se recorren los cursos
           nodo_ens.css("curso").each do |nodo_curso|
-            @curso = "#{nodo_curso['grado']}° #{nodo_curso['letra']}"
+            # se arma el curso ej: 1 A, 2 B
+            @curso = "#{nodo_curso['grado']} #{nodo_curso['letra']}"
             # se recorre la lista de alumnos del curso
             nodo_curso.css("alumno").each do |nodo_alumno|
-              @genero = "Masculino"
-              if nodo_alumno['genero'].downcase == "f"
-                @genero = "Femenino"
-              end
-
-              @rut = "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}"
-
-              @alum = Alumno.find_by "rut = ?", @rut
-              if( @alum )
-                @alum.update_attributes(
-                  nombres: "#{nodo_alumno['nombres']}",
-                  paterno: nodo_alumno['ape_paterno'],
-                  materno: nodo_alumno['ape_materno'],
-                  domicilio: nodo_alumno['direccion'],
-                  rut: @rut,
-                  genero: @genero,
-                  curso: @curso,
-                  telefono: nodo_alumno['telefono'],
-                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
-                  fecha_retiro: nodo_alumno['fecha_retiro'],
-                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
-                )
-                @alum.save
-              else
-                Alumno.create(
-                  nombres: "#{nodo_alumno['nombres']}",
-                  paterno: nodo_alumno['ape_paterno'],
-                  materno: nodo_alumno['ape_materno'],
-                  domicilio: nodo_alumno['direccion'],
-                  rut: @rut,
-                  genero: @genero,
-                  curso: @curso,
-                  telefono: nodo_alumno['telefono'],
-                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
-                  fecha_retiro: nodo_alumno['fecha_retiro'],
-                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
-                  madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                  padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                  apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                )
-              end
+              matricular_alumno(nodo_alumno,@curso)
             end
-
           end
         end
       end
-
-      # funciona
-      # @pre_basica.css("curso").each do |node|
-      #   @a = "#{node['grado']}° #{node['letra']}"
-
-
-      # end
-      # render xml: @colegio
-      # @doc.xpath("//curso//alumno").attr("nombres")
+      # devolver al inicio en caso  de exito
+      redirect_to alumnos_url, notice: 'Matriculas actualizadas'
     else
+      # al inicio con mensaje de error
       redirect_to alumnos_url, notice: 'Seleccione un archivo'
     end
-
   end
 
 
@@ -227,6 +131,55 @@ class AlumnosController < ApplicationController
   end
 
   private
+    # recive el nodo_alumno con todos los datos del archivo xml
+    # y el curso al que pertenece
+    def matricular_alumno(alumno, curso)
+      genero = "Masculino"
+      if alumno['genero'].downcase == "f"
+        genero = "Femenino"
+      end
+      # formato: 12345678-k
+      rut = "#{alumno['run']}-#{alumno['digito_ve']}"
+      alum = Alumno.find_by "rut = ?", rut
+      # si se encuentra el alumno, se actualiza
+      if( alum )
+        # actualizar info del alumno
+        alum.update_attributes(
+          nombres: alumno['nombres'],
+          paterno: alumno['ape_paterno'],
+          materno: alumno['ape_materno'],
+          domicilio: alumno['direccion'],
+          rut: rut,
+          genero: genero,
+          curso: curso,
+          telefono: alumno['telefono'],
+          fecha_incorp: alumno['fecha_incorporacion_curso'],
+          fecha_retiro: alumno['fecha_retiro'],
+          f_nacimiento: alumno['fecha_nacimiento'],
+        )
+        alum.save
+      else
+        # si no, se crea un alumno nuevo
+        # los rut del apoderado, madre, padre son del alumno
+        Alumno.create(
+          nombres: "#{alumno['nombres']}",
+          paterno: alumno['ape_paterno'],
+          materno: alumno['ape_materno'],
+          domicilio: alumno['direccion'],
+          rut: rut,
+          genero: genero,
+          curso: curso,
+          telefono: alumno['telefono'],
+          fecha_incorp: alumno['fecha_incorporacion_curso'],
+          fecha_retiro: alumno['fecha_retiro'],
+          f_nacimiento: alumno['fecha_nacimiento'],
+          madre_rut: rut,
+          padre_rut: rut,
+          apoderado_rut: rut,
+        )
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_alumno
       @alumno = Alumno.find(params[:id])
@@ -244,7 +197,7 @@ class AlumnosController < ApplicationController
       :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad, :subsidio_familiar,
       :subencion, :sistema_salud, :curso, :fecha_incorp, :problema_aprendizaje,
       :fecha_retiro, :causa_retiro, :ingreso_familiar, :necesita_alimento, :protec_social,
-      :estado, :numero_matricula
+      :estado, :numero_matricula, :etnia
       )
     end
 end

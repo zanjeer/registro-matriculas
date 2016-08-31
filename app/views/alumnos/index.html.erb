@@ -1,33 +1,6 @@
 <% if flash[:notice] -%>
   <div class = "alert alert-warning"><%= flash[:notice] %></div>
 <% end %>
-<div class="col-md-4">
-  <div class="text-center">
-    <h1>
-      Lista Reportes
-    </h1>
-
-  </div>
-  <div class="col-md-12">
-    <ol>
-      <li>
-        Lista matriculas por:
-        <ul><li><a href="#">Nombres</a></li></ul>
-        <ul><li><a href="#">Cursos</a></li></ul>
-        <ul><li><a href="#">Rut</a></li></ul>
-      </li>
-    </ol>
-    <br>
-  </div>
-  <%= form_tag :upload , :multipart => true do %>
-  <div class="col-md-8">
-    <%= file_field_tag "file", accept: 'text/xml', class: 'form-control' %>
-
-  </div>
-  <%= submit_tag "Subir", class: "btn btn-warning" %>
-  <% end %>
-
-</div>
 <div class="col-md-8">
   <div class="text-center">
     <h1>
@@ -81,6 +54,33 @@
       <% end %>
     </tbody>
   </table>
+</div>
+<div class="col-md-4">
+  <div class="text-center">
+    <h1>
+      Lista Reportes
+    </h1>
+
+  </div>
+  <div class="col-md-12">
+    <ol>
+      <li>
+        Lista matriculas por:
+        <ul><li><a href="#">Nombres</a></li></ul>
+        <ul><li><a href="#">Cursos</a></li></ul>
+        <ul><li><a href="#">Rut</a></li></ul>
+      </li>
+    </ol>
+    <br>
+  </div>
+  <%= form_tag :upload , :multipart => true do %>
+  <div class="col-md-8">
+    <%= file_field_tag "file", accept: 'text/xml', class: 'form-control' %>
+
+  </div>
+  <%= submit_tag "Subir", class: "btn btn-warning" %>
+  <% end %>
+
 </div>
 
 
