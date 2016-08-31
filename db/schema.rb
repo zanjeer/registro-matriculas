@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825184818) do
+ActiveRecord::Schema.define(version: 20160831203402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,11 @@ ActiveRecord::Schema.define(version: 20160825184818) do
     t.integer  "ingreso_familiar"
     t.string   "necesita_alimento"
     t.string   "protec_social"
+    t.string   "estado"
+    t.integer  "numero_matricula"
   end
+
+  add_index "alumnos", ["rut"], name: "index_alumnos_on_rut", using: :btree
 
   create_table "comments", force: true do |t|
     t.datetime "created_at"

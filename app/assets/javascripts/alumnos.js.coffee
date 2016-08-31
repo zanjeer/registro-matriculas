@@ -7,6 +7,7 @@ $(document).on 'turbolinks:load', ->
   # formato RUT y muestra si hay errores
   # alumno/_form -> tab ALUMNO
   $('#alumno_rut').Rut
+    format: false
     on_error: ->
       $('#error_rut').addClass('has-error').removeClass('has-success')
       return
@@ -15,6 +16,7 @@ $(document).on 'turbolinks:load', ->
       return
 
   $('#alumno_madre_rut').Rut
+    format: false
     on_error: ->
       $('#error_rut_madre').addClass('has-error').removeClass('has-success')
       return
@@ -23,6 +25,7 @@ $(document).on 'turbolinks:load', ->
       return
 
   $('#alumno_padre_rut').Rut
+    format: false
     on_error: ->
       $('#error_rut_padre').addClass('has-error').removeClass('has-success')
       return
@@ -31,6 +34,7 @@ $(document).on 'turbolinks:load', ->
       return
 
   $('#alumno_apoderado_rut').Rut
+    format: false
     on_error: ->
       $('#error_rut_apo').addClass('has-error').removeClass('has-success')
       return

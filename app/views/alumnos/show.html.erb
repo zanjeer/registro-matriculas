@@ -158,7 +158,27 @@
         </div>
         <%= link_to 'Eliminar', @alumno, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       </div>
+      <br>
 
+      <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <h5>Estado Matricula:</h5>
+        </div>
+        <div class="col-md-2">
+          <% if @alumno.estado == 'Activa' %>
+            <div class="btn btn-success disabled"><%= @alumno.estado %></div>
+          <% elsif @alumno.estado == 'Retirado' %>
+            <div class="btn btn-danger disabled"><%= @alumno.estado %></div>
+          <% end %>
+        </div>
+
+        <div class="col-md-2">
+          <h5>Numero Matricula:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= @alumno.numero_matricula %>
+        </div>
+      </div>
     </div>
 
 

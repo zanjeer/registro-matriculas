@@ -21,7 +21,7 @@ class AlumnosController < ApplicationController
             elsif nodo_curso['grado'] == '5'
               @grado = 'Kinder'
             end
-            @curso = "#{@grado}° #{nodo_curso['letra']}"
+            @curso = "#{@grado} #{nodo_curso['letra']}"
 
             # se recorre la lista de alumnos del curso
             nodo_curso.css("alumno").each do |nodo_alumno|
@@ -29,23 +29,46 @@ class AlumnosController < ApplicationController
               if nodo_alumno['genero'].downcase == "f"
                 @genero = "Femenino"
               end
+              @rut = "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}"
 
-              Alumno.create(
-                nombres: "#{nodo_alumno['nombres']}",
-                paterno: nodo_alumno['ape_paterno'],
-                materno: nodo_alumno['ape_materno'],
-                domicilio: nodo_alumno['direccion'],
-                rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                genero: @genero,
-                curso: @curso,
-                telefono: nodo_alumno['telefono'],
-                fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
-                fecha_retiro: nodo_alumno['fecha_retiro'],
-                f_nacimiento: nodo_alumno['fecha_nacimiento'],
-                madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-              )
+
+              @alum = Alumno.find_by "rut = ?", @rut
+
+              if( @alum )
+                # actualizar info del alumno
+                @alum.update_attributes(
+                  nombres: nodo_alumno['nombres'],
+                  paterno: nodo_alumno['ape_paterno'],
+                  materno: nodo_alumno['ape_materno'],
+                  domicilio: nodo_alumno['direccion'],
+                  rut: @rut,
+                  genero: @genero,
+                  curso: @curso,
+                  telefono: nodo_alumno['telefono'],
+                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
+                  fecha_retiro: nodo_alumno['fecha_retiro'],
+                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
+                )
+                @alum.save
+              else
+                # si no  alum se crea el alumno nuevo
+                Alumno.create(
+                  nombres: "#{nodo_alumno['nombres']}",
+                  paterno: nodo_alumno['ape_paterno'],
+                  materno: nodo_alumno['ape_materno'],
+                  domicilio: nodo_alumno['direccion'],
+                  rut: @rut,
+                  genero: @genero,
+                  curso: @curso,
+                  telefono: nodo_alumno['telefono'],
+                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
+                  fecha_retiro: nodo_alumno['fecha_retiro'],
+                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
+                  madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                  padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                  apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                )
+              end
 
             end
 
@@ -61,22 +84,42 @@ class AlumnosController < ApplicationController
                 @genero = "Femenino"
               end
 
-              Alumno.create(
-                nombres: "#{nodo_alumno['nombres']}",
-                paterno: nodo_alumno['ape_paterno'],
-                materno: nodo_alumno['ape_materno'],
-                domicilio: nodo_alumno['direccion'],
-                rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                genero: @genero,
-                curso: @curso,
-                telefono: nodo_alumno['telefono'],
-                fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
-                fecha_retiro: nodo_alumno['fecha_retiro'],
-                f_nacimiento: nodo_alumno['fecha_nacimiento'],
-                madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-                apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
-              )
+              @rut = "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}"
+
+              @alum = Alumno.find_by "rut = ?", @rut
+              if( @alum )
+                @alum.update_attributes(
+                  nombres: "#{nodo_alumno['nombres']}",
+                  paterno: nodo_alumno['ape_paterno'],
+                  materno: nodo_alumno['ape_materno'],
+                  domicilio: nodo_alumno['direccion'],
+                  rut: @rut,
+                  genero: @genero,
+                  curso: @curso,
+                  telefono: nodo_alumno['telefono'],
+                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
+                  fecha_retiro: nodo_alumno['fecha_retiro'],
+                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
+                )
+                @alum.save
+              else
+                Alumno.create(
+                  nombres: "#{nodo_alumno['nombres']}",
+                  paterno: nodo_alumno['ape_paterno'],
+                  materno: nodo_alumno['ape_materno'],
+                  domicilio: nodo_alumno['direccion'],
+                  rut: @rut,
+                  genero: @genero,
+                  curso: @curso,
+                  telefono: nodo_alumno['telefono'],
+                  fecha_incorp: nodo_alumno['fecha_incorporacion_curso'],
+                  fecha_retiro: nodo_alumno['fecha_retiro'],
+                  f_nacimiento: nodo_alumno['fecha_nacimiento'],
+                  madre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                  padre_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                  apoderado_rut: "#{nodo_alumno['run']}-#{nodo_alumno['digito_ve']}",
+                )
+              end
             end
 
           end
@@ -200,7 +243,8 @@ class AlumnosController < ApplicationController
       :padre_ocupacion, :padre_direccion, :padre_escolaridad, :apoderado_rut, :apoderado_nombre,
       :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad, :subsidio_familiar,
       :subencion, :sistema_salud, :curso, :fecha_incorp, :problema_aprendizaje,
-      :fecha_retiro, :causa_retiro, :ingreso_familiar, :necesita_alimento, :protec_social
+      :fecha_retiro, :causa_retiro, :ingreso_familiar, :necesita_alimento, :protec_social,
+      :estado, :numero_matricula
       )
     end
 end
