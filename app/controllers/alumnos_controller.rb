@@ -1,7 +1,6 @@
 class AlumnosController < ApplicationController
   before_action :set_alumno, only: [:show, :edit, :update, :destroy]
   autocomplete :alumno, :nombres
-
   # subir matricula del sige con archivo xml
   def xml_file
     if params[:file]
@@ -28,7 +27,7 @@ class AlumnosController < ApplicationController
         elsif nodo_ens["codigo"] == '110'
           nodo_ens.css("curso").each do |nodo_curso|
             # se arma el curso ej: 1 A, 2 B
-            @curso = "#{nodo_curso['grado']} #{nodo_curso['letra']}"
+            @curso = "#{nodo_curso['grado']}° #{nodo_curso['letra']}"
             # se recorre la lista de alumnos del curso
             nodo_curso.css("alumno").each do |nodo_alumno|
               matricular_alumno(nodo_alumno,@curso)
@@ -44,31 +43,20 @@ class AlumnosController < ApplicationController
     end
   end
 
-
   # GET /alumnos
   # GET /alumnos.json
   def index
     @alumnos = Alumno.all.order('id')
     if params[:search]
-      @alumnos = Alumno.nombre_like("%#{params[:search].upcase}%",
-                                  "%#{params[:search].upcase}%",
-                                  "%#{params[:search].upcase}%",
-                                  "%#{params[:search].upcase}%",
-                                  "%#{params[:search].upcase}%").order('nombres')
-
-
+      @alumnos = Alumno.nombre_like("%#{params[:search].gsub(' ', '%').upcase}%").order('nombres')
     else
     end
   end
 
   def autocomplete_alumno_nombres
-    @result = Alumno.nombre_like("%#{params[:term].upcase}%",
-                                "%#{params[:term].upcase}%",
-                                "%#{params[:term].upcase}%",
-                                "%#{params[:term].upcase}%",
-                                "%#{params[:term].upcase}%").order('nombres')
-
-    render json: @result.map { |alumno| {alumno: alumno.id,
+    # gsub remplasa ' ' por % para lograr una mejor busqueda
+    result = Alumno.nombre_like("%#{params[:term].gsub(' ', '%').upcase}%").order('nombres')
+    render json: result.map { |alumno| {alumno: alumno.id,
                               label: "#{alumno.rut} - #{alumno.nombre_completo} - #{alumno.curso}",
                               value: alumno.rut,
                               nombre: alumno.nombre_completo, rut: alumno.rut,
@@ -160,7 +148,7 @@ class AlumnosController < ApplicationController
         alum.save
       else
         # si no, se crea un alumno nuevo
-        # los rut del apoderado, madre, padre son del alumno
+        # los rut del apoderado, madre, padre
         Alumno.create(
           nombres: "#{alumno['nombres']}",
           paterno: alumno['ape_paterno'],
@@ -179,6 +167,7 @@ class AlumnosController < ApplicationController
         )
       end
     end
+
 
     # Use callbacks to share common setup or constraints between actions.
     def set_alumno

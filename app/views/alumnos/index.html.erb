@@ -11,22 +11,20 @@
     <div class="row">
 
       <div class="col-md-12">
-        <%= form_tag(alumnos_path, :method => "get", id: "search-form") do %>
-
-          <%= text_field_tag :search, params[:search], class: "search-query form-control",
-              placeholder: "Buscar por Nombre, Apellidos, Rut", type: "search",
-              data: {autocomplete: alumnos_autocomplete_alumno_nombres_path} %>
-
+        <%= form_tag(alumnos_path, :method => "get", id: "input_form") do %>
+          <%= autocomplete_field_tag 'input_buscar', '', alumnos_autocomplete_alumno_nombres_path,
+          :class => "form-control", placeholder: "Buscar por: Nombre, Apellidos, Rut, Curso" %>
         <% end %>
       </div>
 
     </div>
 
     <script type="text/javascript" charset="utf-8">
-
-      $('#search').bind('railsAutocomplete.select', function(event, data){
-        $('#search-form').submit()
-      });
+    $( document ).ready(function() {
+      $('#input_buscar').bind("railsAutocomplete.select", function(event, data){
+        $('#input_form').submit();
+      })
+    });
     </script>
 
 

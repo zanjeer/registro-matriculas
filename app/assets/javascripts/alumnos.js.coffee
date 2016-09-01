@@ -66,14 +66,12 @@ $(document).on 'turbolinks:load', ->
     else
       $('#input_otro').prop('disabled', true).hide()
 
+  # $('#search_inp').bind 'railsAutocomplete.select', (event, data) ->
+  #   $('#search-form').submit()
+
   # agregar .val() del input al valor del check_box.value
   # alumno/_form -> tab FAMILIA
   $('#input_otro').change ->
     $('#alumno_vive_con_otro').val(@value)
     console.log(@value)
   return
-
-# $('#buscar_id').bind 'railsAutocomplete.select', (event, data) ->
-#   ### Do something here ###
-#   alert data.item.id
-#   return
