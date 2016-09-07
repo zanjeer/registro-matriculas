@@ -1,8 +1,7 @@
-<%= wicked_pdf_stylesheet_link_tag    'Application', media: 'all', 'data-turbolinks-track' => true %>
-<%= wicked_pdf_javascript_include_tag 'Application', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag "http://www.google.com/jsapi"%>
-<%= wicked_pdf_javascript_include_tag 'chartkick'%>
-<div class="document">
-  ..
+
+<%= javascript_include_tag "https://www.google.com/jsapi" %>
+<%= wicked_pdf_javascript_include_tag "chartkick" %>
+<div class="col-md-12">
+
   <%= pie_chart Alumno.group(:genero).count %>
 </div>
