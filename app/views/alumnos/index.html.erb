@@ -1,6 +1,7 @@
 <% if flash[:notice] -%>
   <div class = "alert alert-warning"><%= flash[:notice] %></div>
 <% end %>
+
 <div class="col-md-8">
   <div class="text-center">
     <h1>
@@ -53,6 +54,7 @@
     </tbody>
   </table>
 </div>
+
 <div class="col-md-4">
   <div class="text-center">
     <h1>
@@ -71,6 +73,8 @@
     </ol>
     <br>
   </div>
+
+
   <%= form_tag :upload , :multipart => true do %>
   <div class="col-md-8">
     <%= file_field_tag "file", accept: 'text/xml', class: 'form-control' %>
@@ -83,3 +87,5 @@
 
 
 <br>
+
+  <%= pie_chart Alumno.group(:genero).count %>
