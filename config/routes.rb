@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :alumnos
 
   post 'upload' => 'alumnos#xml_file'
+  get 'reporte' => 'alumnos#reportes'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

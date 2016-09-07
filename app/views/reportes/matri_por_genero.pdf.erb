@@ -1,7 +1,14 @@
+<%= wicked_pdf_stylesheet_link_tag "reportes" %>
 
 <%= javascript_include_tag "https://www.google.com/jsapi" %>
 <%= wicked_pdf_javascript_include_tag "chartkick" %>
-<div class="col-md-12">
 
-  <%= pie_chart Alumno.group(:genero).count %>
+<div class="row">
+  <div style="text-align: center;">
+    <%= @titulo %>
+  </div>
+  <div class="col-md-4">
+
+    <%= pie_chart Alumno.group(:genero).count %>
+  </div>
 </div>

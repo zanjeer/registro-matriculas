@@ -11,8 +11,8 @@
  * file per style scope.
 
  */
-@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-sprockets";
 @import "alumnos";
 
 .ui-helper-hidden-accessible { display:none; }

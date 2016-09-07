@@ -66,10 +66,11 @@
     <ol>
       <li>
         Lista matriculas por:
-        <ul><li><a href="#">Nombres</a></li></ul>
+        <ul><li><%= link_to 'Por genero', reporte_path(format: :pdf, :tipo => 'genero') %></li></ul>
         <ul><li><a href="#">Cursos</a></li></ul>
         <ul><li><a href="#">Rut</a></li></ul>
       </li>
+      <li><%= link_to 'Matricula por genero', reporte_path(format: :pdf, :tipo => 'genero') %></li>
     </ol>
     <br>
   </div>
@@ -87,5 +88,3 @@
 
 
 <br>
-
-  <%= pie_chart Alumno.group(:genero).count %>

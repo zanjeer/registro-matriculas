@@ -23,7 +23,7 @@ gem 'rails-jquery-autocomplete'
 # pdf
 gem 'wicked_pdf'
 gem 'chartkick'
-gem 'wkhtmltopdf-binary', group: :development
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.3.0', group: :development
 gem 'wkhtmltopdf-heroku', group: :production
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

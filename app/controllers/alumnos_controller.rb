@@ -67,18 +67,32 @@ class AlumnosController < ApplicationController
   # GET /alumnos/1
   # GET /alumnos/1.json
   def show
+  end
+
+  # reportes
+  def reportes
+    case params[:tipo]
+    when "por_nombre"
+      @titulo = "Reporte Matriculas por Nombre"
+      @template = "reportes/por_nombre"
+    when "genero"
+      @titulo = "Numero matriculas por Genero"
+      @template = "reportes/matri_por_genero"
+    else
+    end
+
     respond_to do |format|
-     format.html
-     format.pdf do
-       render :pdf => "file_name",
-              :template => 'reportes/matri_por_genero',
-               :footer => {
-                  :center => "Center",
-                  :left => "Left",
-                  :right => "Right"
-               }
-     end
-   end
+      format.pdf do
+        render pdf: "Reporte_por",
+               template: "#{@template}",
+               javascript_delay: 5000,
+                :footer => {
+                   :center => "Center",
+                   :left => "Left",
+                   :right => "Right"
+                }
+      end
+    end
   end
 
   # GET /alumnos/new
