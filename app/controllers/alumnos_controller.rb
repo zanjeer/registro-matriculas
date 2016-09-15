@@ -14,9 +14,9 @@ class AlumnosController < ApplicationController
           # se recorren los cursos
           nodo_ens.css("curso").each do |nodo_curso|
             if nodo_curso['grado'] == '4'
-              @curso = "Pre-Kinder #{nodo_curso['letra']}"
+              @curso = "Pre-Kinder #{nodo_curso['letra'].strip}"
             elsif nodo_curso['grado'] == '5'
-              @curso = "Kinder #{nodo_curso['letra']}"
+              @curso = "Kinder #{nodo_curso['letra'].strip}"
             end
             # se recorre la lista de alumnos del curso
             # si el alumno existe de actualiza
@@ -27,7 +27,7 @@ class AlumnosController < ApplicationController
         elsif nodo_ens["codigo"] == '110'
           nodo_ens.css("curso").each do |nodo_curso|
             # se arma el curso ej: 1 A, 2 B
-            @curso = "#{nodo_curso['grado']}° #{nodo_curso['letra']}"
+            @curso = "#{nodo_curso['grado'].strip}° #{nodo_curso['letra'].strip}"
             # se recorre la lista de alumnos del curso
             nodo_curso.css("alumno").each do |nodo_alumno|
               matricular_alumno(nodo_alumno,@curso)
@@ -47,8 +47,8 @@ class AlumnosController < ApplicationController
   # GET /alumnos.json
   def index
     @alumnos = Alumno.all.order('id')
-    if params[:search]
-      @alumnos = Alumno.nombre_like("%#{params[:search].gsub(' ', '%').upcase}%").order('nombres')
+    if params[:input_buscar]
+      @alumnos = Alumno.nombre_like("%#{params[:input_buscar].gsub(' ', '%').upcase}%").order('nombres')
     else
     end
   end
@@ -76,21 +76,30 @@ class AlumnosController < ApplicationController
       @titulo = "Reporte Matriculas por Nombre"
       @template = "reportes/por_nombre"
     when "genero"
-      @titulo = "Numero matriculas por Genero"
+      @genero = Alumno.group(:genero).count
+      @titulo = "Alumnos por Genero"
       @template = "reportes/matri_por_genero"
+      @total = Alumno.all.count
+    when "prioritario_genero"
+      @tipo = "Prioritario"
+      @genero = Alumno.where(subencion: @tipo).group(:genero).count
+      @titulo = "Alumnos Prioritarios por Genero"
+      @template = "reportes/subencion_por_genero"
+      @total = Alumno.where(subencion: @tipo).count
+    when "preferente_genero"
+      @tipo = "Preferente"
+      @genero = Alumno.where(subencion: @tipo).group(:genero).count
+      @titulo = "Alumnos Preferente por Genero"
+      @template = "reportes/subencion_por_genero"
+      @total = Alumno.where(subencion: @tipo).count
     else
     end
 
     respond_to do |format|
       format.pdf do
-        render pdf: "Reporte_por",
+        render pdf: "reporte",
                template: "#{@template}",
-               javascript_delay: 5000,
-                :footer => {
-                   :center => "Center",
-                   :left => "Left",
-                   :right => "Right"
-                }
+               javascript_delay: 5000
       end
     end
   end

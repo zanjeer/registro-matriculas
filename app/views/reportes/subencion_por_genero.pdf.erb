@@ -1,4 +1,4 @@
-<%= wicked_pdf_stylesheet_link_tag "reportes" -%>
+<%= wicked_pdf_stylesheet_link_tag "reportes" %>
 <%= javascript_include_tag "https://www.google.com/jsapi" %>
 <%= wicked_pdf_javascript_include_tag "chartkick" %>
 
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-xs-6 col-xs-offset-2">
-      <%= pie_chart Alumno.group(:genero).count, width: "600px", height: "300px" %>
+      <%= pie_chart Alumno.where(subencion: @tipo).group(:genero).count, width: "600px", height: "300px" %>
     </div>
   </div>
 </div>
