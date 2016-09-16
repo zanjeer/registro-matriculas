@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831214811) do
+ActiveRecord::Schema.define(version: 20160916054054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(version: 20160831214811) do
     t.datetime "updated_at"
     t.string   "procedencia"
     t.string   "cur_repetidos"
-    t.boolean  "problema_audicion"
-    t.boolean  "problema_dental"
-    t.boolean  "problema_vision"
-    t.boolean  "problema_medico"
+    t.boolean  "problema_audicion",     default: false,    null: false
+    t.boolean  "problema_dental",       default: false,    null: false
+    t.boolean  "problema_vision",       default: false,    null: false
+    t.boolean  "problema_medico",       default: false,    null: false
     t.text     "problema_descripcion"
     t.text     "alergia_medicamento"
     t.string   "tipo_vivienda"
@@ -55,21 +55,21 @@ ActiveRecord::Schema.define(version: 20160831214811) do
     t.text     "apoderado_ocupacion"
     t.string   "apoderado_escolaridad"
     t.text     "apoderado_direccion"
-    t.boolean  "subsidio_familiar"
+    t.boolean  "subsidio_familiar",     default: false,    null: false
     t.string   "subencion"
     t.string   "sistema_salud"
     t.string   "genero"
     t.string   "curso"
     t.date     "fecha_incorp"
-    t.string   "problema_aprendizaje"
     t.date     "fecha_retiro"
     t.text     "causa_retiro"
     t.integer  "ingreso_familiar"
-    t.string   "necesita_alimento"
-    t.string   "protec_social"
-    t.string   "estado"
+    t.string   "estado",                default: "Activa"
     t.integer  "numero_matricula"
-    t.string   "etnia"
+    t.boolean  "necesita_alimento",     default: false,    null: false
+    t.boolean  "protec_social",         default: false,    null: false
+    t.boolean  "etnia",                 default: false,    null: false
+    t.boolean  "problema_aprendizaje",  default: false,    null: false
   end
 
   add_index "alumnos", ["rut"], name: "index_alumnos_on_rut", using: :btree

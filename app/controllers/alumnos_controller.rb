@@ -72,9 +72,10 @@ class AlumnosController < ApplicationController
   # reportes
   def reportes
     case params[:tipo]
-    when "por_nombre"
+    when "por_curso"
       @titulo = "Reporte Matriculas por Nombre"
-      @template = "reportes/por_nombre"
+      @template = "reportes/por_curso"
+      @lista = Alumno.all
     when "genero"
       @genero = Alumno.group(:genero).count
       @lista = Alumno.all

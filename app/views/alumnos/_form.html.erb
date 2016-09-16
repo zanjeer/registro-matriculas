@@ -95,7 +95,7 @@
           <h5>Domicilio:</h5>
         </div>
         <div class="col-md-2">
-          <%= f.text_area :domicilio, class: "form-control" %>
+          <%= f.text_area :domicilio, class: "form-control", rows: "5" %>
         </div>
       </div>
       <hr>
@@ -145,22 +145,21 @@
           <%= f.date_field :fecha_incorp, class: "form-control" %>
         </div>
 
-        <div class="col-md-2">
-          <h5>Problema Aprendizaje?:</h5>
-        </div>
-        <div class="col-md-2">
-          <%= f.select :problema_aprendizaje, [['Si'], ['No']],
-          {:include_blank => true}, {class: "form-control"} %>
-        </div>
+
       </div>
       <br>
       <div class="row">
-        <div class="col-md-3 col-md-offset-1 text-left">
-          <h5>Etnia:</h5>
-        </div>
-        <div class="col-md-2">
-          <%= f.select :etnia, [['agg'], ],
-          {:include_blank => true}, {class: "form-control"} %>
+        <div class="col-md-6 col-md-offset-1 text-left">
+          <div class="form-group">
+            <div class="checkbox-inline">
+              <%= f.check_box :etnia %>
+              <%= f.label :etnia, 'Etnia' %>
+            </div>
+            <div class="checkbox-inline">
+              <%= f.check_box :problema_aprendizaje %>
+              <%= f.label :problema_aprendizaje, 'Problema Aprendizaje?' %>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -205,45 +204,35 @@
       <br>
 
       <div class="row">
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-2">
           <div class="form-group">
             <div class="checkbox-inline">
               <%= f.check_box :problema_medico %>
               <%= f.label :problema_medico, 'Problema Medico' %>
             </div>
-          </div>
-
-          <div class="form-group">
             <div class="checkbox-inline">
               <%= f.check_box :problema_dental %>
               <%= f.label :problema_dental, 'Problema Dental' %>
             </div>
-          </div>
-
-          <div class="form-group">
             <div class="checkbox-inline">
               <%= f.check_box :problema_audicion %>
               <%= f.label :problema_audicion, 'Problema Audicion' %>
             </div>
-          </div>
-
-          <div class="form-group">
             <div class="checkbox-inline">
               <%= f.check_box :problema_vision %>
               <%= f.label :problema_vision, 'Problema de Vision' %>
             </div>
           </div>
-
         </div>
 
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-1 col-md-offset-2">
           <h5>Descripcion:</h5>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 col-md-offset-1">
           <%= f.text_area :problema_descripcion, class: "form-control" %>
           <br>
         </div>
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-2 col-md-offset-2">
           <h5>Alergia a algun medicamento(indicar):</h5>
         </div>
         <div class="col-md-5">
@@ -292,7 +281,23 @@
         </div>
       </div>
       <br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+          <h5>Sistema de Salud:</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :sistema_salud, [['Fonasa'], ['Isapre'], ['Particular'], ['Sin sistema']],
+          {:include_blank => true}, {class: "form-control"} %>
+        </div>
 
+        <div class="col-md-2">
+          <h5>Ingreso Grupo Familiar:</h5>
+        </div>
+        <div class="col-md-2">
+          <%=  f.number_field :ingreso_familiar, class: "form-control" %>
+        </div>
+      </div>
+      <br>
       <div class="row">
         <div class="col-md-2 col-md-offset-1 text-left">
           <h5>Vive Con:</h5>
@@ -331,37 +336,19 @@
         </div>
       </div>
       <br>
-      <div class="row">
-        <div class="col-md-2 col-md-offset-1">
-          <h5>Sistema de Salud:</h5>
-        </div>
-        <div class="col-md-2">
-          <%= f.select :sistema_salud, [['Fonasa'], ['Isapre'], ['Particular'], ['Sin sistema']],
-          {:include_blank => true}, {class: "form-control"} %>
-        </div>
 
-        <div class="col-md-2">
-          <h5>Ingreso Grupo Familiar:</h5>
-        </div>
-        <div class="col-md-2">
-          <%=  f.number_field :ingreso_familiar, class: "form-control" %>
-        </div>
-      </div>
-      <br>
       <div class="row">
-        <div class="col-md-2 col-md-offset-1">
-          <h5>Necesita Alimntacion?:</h5>
-        </div>
-        <div class="col-md-2">
-          <%= f.select :necesita_alimento, [['Si'], ['No']],{}, class: "form-control" %>
-        </div>
-
-        <div class="col-md-2">
-          <h5>Ficha Proteccion social:</h5>
-        </div>
-        <div class="col-md-2">
-          <%= f.select :protec_social, [['Si'], ['No']],
-          {}, class: "form-control" %>
+        <div class="col-md-6 col-md-offset-1">
+          <div class="form-group">
+            <div class="checkbox-inline">
+              <%= f.check_box :necesita_alimento %>
+              <%= f.label :necesita_alimento, 'Necesita Alimentacion?' %>
+            </div>
+            <div class="checkbox-inline">
+              <%= f.check_box :protec_social %>
+              <%= f.label :protec_social, 'Ficha proteccion Social' %>
+            </div>
+          </div>
         </div>
 
       </div>

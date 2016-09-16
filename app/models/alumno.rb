@@ -10,4 +10,8 @@ class Alumno < ActiveRecord::Base
   def nombre_completo
    "#{nombres.upcase}  #{paterno.upcase} #{materno.upcase}"
   end
+
+  def nombre_completo_formal
+    "#{paterno.upcase} #{materno.upcase} #{nombres.upcase}"
+  end
 end

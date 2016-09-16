@@ -5,7 +5,7 @@
 
 <div class="col-md-12 text-center">
   <h3>
-    <!-- <%= link_to 'Atras', alumnos_path, class: 'btn btn-warning' %> -->
+    <%= link_to 'Atras', alumnos_path, :class => "btn btn-warning" %>
     <%= "#{@alumno.nombre_completo} - #{@alumno.curso}" %>
   </h3>
   <br>
@@ -140,7 +140,9 @@
             <h5><%= human_boolean(@alumno.problema_aprendizaje) %></h5>
         </div>
       </div>
-      <br>
+
+
+      <hr>
 
       <div class="row">
         <div class="col-md-3 col-md-offset-1">
@@ -299,7 +301,7 @@
           <h5>Ficha Proteccion social:</h5>
         </div>
         <div class="col-md-2">
-            <h5><%= @alumno.protec_social %></h5>
+            <h5><%= human_boolean(@alumno.protec_social)%></h5>
         </div>
 
       </div>

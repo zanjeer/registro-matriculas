@@ -39,7 +39,6 @@
 
   <% @lista.order(:curso).group_by(&:curso).each do |curso, alumnos|
     alum_curso = Alumno.where(curso: curso, subencion: @tipo)
-
   %>
     <hr>
     <div class="row text-center">
@@ -78,9 +77,9 @@
           <th>Genero</th>
         </thead>
         <tbody>
-          <% alumnos.each do |a| %>
+          <% alumnos.sort_by {|e| e[:paterno]}.each do |a| %>
             <tr>
-              <td><%= a.nombre_completo %></td>
+              <td><%= a.nombre_completo_formal %></td>
               <td><%= a.rut %></td>
               <td><%= a.genero %></td>
             </tr>

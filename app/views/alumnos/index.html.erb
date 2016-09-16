@@ -64,11 +64,7 @@
   </div>
   <div class="col-md-12">
     <ol>
-      <li>
-        Lista matriculas por:
-        <ul><li><a href="#">Cursos</a></li></ul>
-        <ul><li><a href="#">Rut</a></li></ul>
-      </li>
+      <li>Lista <%= link_to 'Matricula por Curso', reporte_path(format: :pdf, :tipo => 'por_curso') %></li>
       <li><%= link_to 'Matricula por genero', reporte_path(format: :pdf, :tipo => 'genero') %>
         <ul><li><%= link_to 'Alumnos Prioritarios', reporte_path(format: :pdf, :tipo => 'prioritario_genero') %></li></ul>
         <ul><li><%= link_to 'Alumno Preferentes', reporte_path(format: :pdf, :tipo => 'preferente_genero') %></li></ul>
@@ -88,6 +84,6 @@
   <% end %>
 
 </div>
-
+  <%= pie_chart Alumno.group(:problema_aprendizaje).count, width: "600px", height: "300px" %>
 
 <br>
