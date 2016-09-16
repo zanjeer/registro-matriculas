@@ -37,7 +37,7 @@
 
   <div style="page-break-after: always;"></div>
 
-  <% @lista.group_by(&:curso).each do |curso, alumnos|
+  <% @lista.order(:curso).group_by(&:curso).each do |curso, alumnos|
     alum_curso = Alumno.where(curso: curso, subencion: @tipo)
 
   %>
