@@ -69,9 +69,9 @@
         <ul><li><a href="#">Cursos</a></li></ul>
         <ul><li><a href="#">Rut</a></li></ul>
       </li>
-      <li><%= link_to 'Alumnos por genero', reporte_path(format: :pdf, :tipo => 'genero') %>
-        <ul><li><%= link_to 'Prioritarios', reporte_path(format: :pdf, :tipo => 'prioritario_genero') %></li></ul>
-        <ul><li><%= link_to 'Preferentes', reporte_path(format: :pdf, :tipo => 'preferente_genero') %></li></ul>
+      <li><%= link_to 'Matricula por genero', reporte_path(format: :pdf, :tipo => 'genero') %>
+        <ul><li><%= link_to 'Alumnos Prioritarios', reporte_path(format: :pdf, :tipo => 'prioritario_genero') %></li></ul>
+        <ul><li><%= link_to 'Alumno Preferentes', reporte_path(format: :pdf, :tipo => 'preferente_genero') %></li></ul>
       </li>
 
     </ol>

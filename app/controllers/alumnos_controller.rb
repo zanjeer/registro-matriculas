@@ -77,18 +77,19 @@ class AlumnosController < ApplicationController
       @template = "reportes/por_nombre"
     when "genero"
       @genero = Alumno.group(:genero).count
+      @lista = Alumno.all
       @titulo = "Alumnos por Genero"
       @template = "reportes/matri_por_genero"
       @total = Alumno.all.count
     when "prioritario_genero"
       @tipo = "Prioritario"
-      @genero = Alumno.where(subencion: @tipo).group(:genero).count
+      @lista = Alumno.where(subencion: @tipo)
       @titulo = "Alumnos Prioritarios por Genero"
       @template = "reportes/subencion_por_genero"
       @total = Alumno.where(subencion: @tipo).count
     when "preferente_genero"
       @tipo = "Preferente"
-      @genero = Alumno.where(subencion: @tipo).group(:genero).count
+      @lista = Alumno.where(subencion: @tipo)
       @titulo = "Alumnos Preferente por Genero"
       @template = "reportes/subencion_por_genero"
       @total = Alumno.where(subencion: @tipo).count
@@ -99,7 +100,7 @@ class AlumnosController < ApplicationController
       format.pdf do
         render pdf: "reporte",
                template: "#{@template}",
-               javascript_delay: 5000
+               javascript_delay: 1000
       end
     end
   end

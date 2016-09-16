@@ -1,28 +1,27 @@
 <%= wicked_pdf_stylesheet_link_tag "reportes" %>
 <%= javascript_include_tag "https://www.google.com/jsapi" %>
 <%= wicked_pdf_javascript_include_tag "chartkick" %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
 <div class="container">
   <div class="row">
     <div style="text-align: center;">
-      <h3><%= @titulo %></h3>
+      <h3><b><%= @titulo %></b></h3>
     </div>
     <br><br>
-    <div class="col-xs-6 col-xs-offset-3">
+    <div class="col-xs-6">
       <table class="table table-striped table-bordered">
         <tr>
           <th>Genero</th>
           <th>Cantidad</th>
         </tr>
         <tbody>
-          <tr>
-            <td>Masculino</td>
-            <td><%= @genero['Masculino'] %></td>
-          </tr>
-          <tr>
-            <td>Femenino</td>
-            <td><%= @genero['Femenino'] %></td>
-          </tr>
+          <% @lista.group(:genero).count.each do |key, value| %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= value %></td>
+            </tr>
+          <% end %>
           <tr>
             <td>Total</td>
             <td><%=  @total %></td>
@@ -31,8 +30,66 @@
       </table>
     </div>
 
-    <div class="col-xs-6 col-xs-offset-2">
-      <%= pie_chart Alumno.where(subencion: @tipo).group(:genero).count, width: "600px", height: "300px" %>
+    <div class="col-xs-6">
+      <%= pie_chart @lista.group(:genero).count,
+                    width: "500px", height: "200px",
+                    label: "Value"
+                    %>
     </div>
   </div>
+  <div style="page-break-after: always;"></div>
+
+  <% @lista.group_by(&:curso).each do |curso, alumnos|
+    alum_curso = Alumno.where(curso: curso, subencion: @tipo)
+
+  %>
+    <hr>
+    <div class="row text-center">
+      <h4><%= "#{curso}" %></h4>
+      <br>
+      <div class="col-xs-6">
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th>Genero</th>
+            <th>Cantidad</th>
+          </tr>
+          <tbody>
+            <% alum_curso.group(:genero).count.each do |key, value| %>
+              <tr>
+                <td><%= key %></td>
+                <td><%= value %></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td>Total</td>
+              <td><%= alumnos.count %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-xs-6">
+        <%= pie_chart alum_curso.group(:genero).count,
+        width: "500px", height: "200px"
+        %>
+      </div>
+
+      <table class="table table-striped table-bordered">
+        <thead>
+          <th>Nombre</th>
+          <th>Rut</th>
+          <th>Genero</th>
+        </thead>
+        <tbody>
+          <% alumnos.each do |a| %>
+            <tr>
+              <td><%= a.nombre_completo %></td>
+              <td><%= a.rut %></td>
+              <td><%= a.genero %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div style="page-break-after: always;"></div>
+  <% end %>
 </div>
