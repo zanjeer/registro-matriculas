@@ -64,12 +64,14 @@
   </div>
   <div class="col-md-12">
     <ol>
-      <li>Lista <%= link_to 'Matricula por Curso', reporte_path(format: :pdf, :tipo => 'por_curso') %></li>
+      <li><%= link_to 'Lista matricula por Curso', reporte_path(format: :pdf, :tipo => 'por_curso') %></li>
       <li><%= link_to 'Matricula por genero', reporte_path(format: :pdf, :tipo => 'genero') %>
         <ul><li><%= link_to 'Alumnos Prioritarios', reporte_path(format: :pdf, :tipo => 'prioritario_genero') %></li></ul>
         <ul><li><%= link_to 'Alumno Preferentes', reporte_path(format: :pdf, :tipo => 'preferente_genero') %></li></ul>
       </li>
-
+      <li><%= link_to 'N° personas en el hogar', reporte_path(format: :pdf, :tipo => 'numero_hogar') %></li>
+      <li><%= link_to 'Alumnos con descendencia indigena', reporte_path(format: :pdf, :tipo => 'lista_etnia') %></li>
+      <li> <%= link_to 'Tuicion Vivienda', reporte_path(format: :pdf, :tipo => 'tuicion_vivienda') %> </li>
     </ol>
     <br>
   </div>

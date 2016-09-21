@@ -94,6 +94,19 @@ class AlumnosController < ApplicationController
       @titulo = "Alumnos Preferente por Genero"
       @template = "reportes/subencion_por_genero"
       @total = Alumno.where(subencion: @tipo).count
+    when "numero_hogar"
+      @titulo = "N° de personas en el hogar"
+      @template = "reportes/numero_hogar"
+      @lista = Alumno.all
+    when "lista_etnia"
+      @titulo = "Alumnos de descendencia indigena"
+      @template = "reportes/etnia"
+      @lista = Alumno.where(etnia: true)
+      @total = Alumno.all.count
+    when "tuicion_vivienda"
+      @titulo = "Tuicion Vivienda"
+      @template = "reportes/tuicion_vivienda"
+      @lista = Alumno.all
     else
     end
 
@@ -163,6 +176,11 @@ class AlumnosController < ApplicationController
       if alumno['genero'].downcase == "f"
         genero = "Femenino"
       end
+      etnia = false
+      if alumno['codigo_etnia'] != "0"
+        etnia = true
+      end
+
       # formato: 12345678-k
       rut = "#{alumno['run']}-#{alumno['digito_ve']}"
       alum = Alumno.find_by "rut = ?", rut
@@ -175,6 +193,7 @@ class AlumnosController < ApplicationController
           materno: alumno['ape_materno'],
           domicilio: alumno['direccion'],
           rut: rut,
+          etnia: etnia,
           genero: genero,
           curso: curso,
           telefono: alumno['telefono'],
@@ -192,6 +211,7 @@ class AlumnosController < ApplicationController
           materno: alumno['ape_materno'],
           domicilio: alumno['direccion'],
           rut: rut,
+          etnia: etnia,
           genero: genero,
           curso: curso,
           telefono: alumno['telefono'],
