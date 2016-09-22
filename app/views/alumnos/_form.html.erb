@@ -145,7 +145,17 @@
           <%= f.date_field :fecha_incorp, class: "form-control" %>
         </div>
 
-
+        <div class="col-md-2">
+          <h5>Religion</h5>
+        </div>
+        <div class="col-md-2">
+          <%= f.select :religion, [['Judía'],['Católica Ortodoxa'],['Presbiteriana'],
+                                  ['Católica'],['Adventista'],['Anglicana'],['Evangelica Luterana'],
+                                  ['Metodista'],['Corporaciones Evangelicas'],['Evangélica Bautisca'],
+                                  ['Fe Baha´I'],['Evangélica Pentecostal'],['Testigos de Jheová'],
+                                  ['Capellanía Protestante'],['Ejercito  de Salvación'],['Musulmana']],
+                                  {:include_blank => true}, {class: "form-control"} %>
+        </div>
       </div>
       <br>
       <div class="row">

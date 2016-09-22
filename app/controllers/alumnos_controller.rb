@@ -107,6 +107,14 @@ class AlumnosController < ApplicationController
       @titulo = "Tuicion Vivienda"
       @template = "reportes/tuicion_vivienda"
       @lista = Alumno.all
+    when "religion"
+      @titulo = "Preferencia de Religion"
+      @template = "reportes/religion"
+      @lista = Alumno.all
+    when "pre_colegio"
+      @titulo = "Colegios de Procedencia"
+      @template = "reportes/pre_colegio"
+      @lista = Alumno.all
     else
     end
 
@@ -243,7 +251,7 @@ class AlumnosController < ApplicationController
       :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad, :subsidio_familiar,
       :subencion, :sistema_salud, :curso, :fecha_incorp, :problema_aprendizaje,
       :fecha_retiro, :causa_retiro, :ingreso_familiar, :necesita_alimento, :protec_social,
-      :estado, :numero_matricula, :etnia
+      :estado, :numero_matricula, :etnia, :religion
       )
     end
 end

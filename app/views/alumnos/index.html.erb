@@ -72,6 +72,8 @@
       <li><%= link_to 'N° personas en el hogar', reporte_path(format: :pdf, :tipo => 'numero_hogar') %></li>
       <li><%= link_to 'Alumnos con descendencia indigena', reporte_path(format: :pdf, :tipo => 'lista_etnia') %></li>
       <li> <%= link_to 'Tuicion Vivienda', reporte_path(format: :pdf, :tipo => 'tuicion_vivienda') %> </li>
+      <li> <%= link_to 'Preferencia de Religion', reporte_path(format: :pdf, :tipo => 'religion') %> </li>
+      <li> <%= link_to 'Colegios de Procedencia', reporte_path(format: :pdf, :tipo => 'pre_colegio') %> </li>
     </ol>
     <br>
   </div>
@@ -86,6 +88,6 @@
   <% end %>
 
 </div>
-  <%= pie_chart Alumno.group(:problema_aprendizaje).count, width: "600px", height: "300px" %>
+
 
 <br>
