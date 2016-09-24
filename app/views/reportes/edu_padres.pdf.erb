@@ -1,0 +1,65 @@
+<%= wicked_pdf_stylesheet_link_tag "reportes" %>
+<%= javascript_include_tag "https://www.google.com/jsapi" %>
+<%= wicked_pdf_javascript_include_tag "chartkick" %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<div class="container">
+  <div class="row">
+    <div style="text-align: center;">
+      <h3><b><%= @titulo %></b></h3>
+    </div>
+    <br><br>
+  </div>
+
+<div class="row">
+
+  <div class="col-xs-12">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Numero Padres</th>
+        <th>Numero Madres</th>
+        <th>Total</th>
+        <th>Escolaridad</th>
+      </tr>
+
+      <tbody>
+        <% @lista.group_by(&:madre_escolaridad).each do |nivel, alumnos| %>
+          <tr>
+            <% if (nivel != "" && nivel != nil)
+              pa = @lista.where(padre_escolaridad: nivel).count
+              ma = @lista.where(madre_escolaridad: nivel).count
+            %>
+            <td><%= pa %></td>
+            <td><%= ma %></td>
+            <td><%= pa + ma %></td>
+            <td><%= nivel %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <h4>Escolaridad Padres:</h4>
+    <%= pie_chart @lista.where("padre_escolaridad IS NOT NULL AND padre_escolaridad != ?","")
+    .group(:padre_escolaridad).count,
+    width: "500px", height: "200px",
+    label: "Value"
+    %>
+  </div>
+  <div class="col-xs-6">
+    <h4>Escolaridad Madres:</h4>
+    <%= pie_chart @lista.where("madre_escolaridad IS NOT NULL AND madre_escolaridad != ?","")
+    .group(:madre_escolaridad).count,
+    width: "500px", height: "200px",
+    label: "Value"
+    %>
+  </div>
+</div>
+
+</div>

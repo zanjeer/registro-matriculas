@@ -53,6 +53,18 @@
       <% end %>
     </tbody>
   </table>
+  <div class="row">
+    <hr>
+    <h4>Actualizar Lista Alumnos:</h4>
+    <%= form_tag :upload , :multipart => true do %>
+    <div class="col-md-10">
+      <%= file_field_tag "file", accept: 'text/xml', class: 'form-control' %>
+
+    </div>
+    <%= submit_tag "Subir", class: "btn btn-warning" %>
+    <% end %>
+  </div>
+
 </div>
 
 <div class="col-md-4">
@@ -60,7 +72,8 @@
     <h1>
       Lista Reportes
     </h1>
-
+    <br><br>
+    <br>
   </div>
   <div class="col-md-12">
     <ol>
@@ -69,23 +82,23 @@
         <ul><li><%= link_to 'Alumnos Prioritarios', reporte_path(format: :pdf, :tipo => 'prioritario_genero') %></li></ul>
         <ul><li><%= link_to 'Alumno Preferentes', reporte_path(format: :pdf, :tipo => 'preferente_genero') %></li></ul>
       </li>
-      <li><%= link_to 'N° personas en el hogar', reporte_path(format: :pdf, :tipo => 'numero_hogar') %></li>
+      <li><%= link_to 'N° personas en el hogar', reporte_path(format: :pdf, :tipo => 'numero_personas') %></li>
       <li><%= link_to 'Alumnos con descendencia indigena', reporte_path(format: :pdf, :tipo => 'lista_etnia') %></li>
       <li> <%= link_to 'Tuicion Vivienda', reporte_path(format: :pdf, :tipo => 'tuicion_vivienda') %> </li>
       <li> <%= link_to 'Preferencia de Religion', reporte_path(format: :pdf, :tipo => 'religion') %> </li>
       <li> <%= link_to 'Colegios de Procedencia', reporte_path(format: :pdf, :tipo => 'pre_colegio') %> </li>
+      <li> <%= link_to 'Escolaridad Padres', reporte_path(format: :pdf, :tipo => 'edu_padres') %> </li>
+      <li> <%= link_to 'Personas con quien vive', reporte_path(format: :pdf, :tipo => 'vive_con') %> </li>
+      <li> <%= link_to 'Alumnos con Necesidad de Alimentacion', reporte_path(format: :pdf, :tipo => 'necesita_alimento') %> </li>
+      <li> <%= link_to 'Alumnos con Subsidio Familiar', reporte_path(format: :pdf, :tipo => 'subsidio_familiar') %> </li>
+
     </ol>
     <br>
+    <br>
+    <br><br><br>
+    <hr>
   </div>
 
-
-  <%= form_tag :upload , :multipart => true do %>
-  <div class="col-md-8">
-    <%= file_field_tag "file", accept: 'text/xml', class: 'form-control' %>
-
-  </div>
-  <%= submit_tag "Subir", class: "btn btn-warning" %>
-  <% end %>
 
 </div>
 

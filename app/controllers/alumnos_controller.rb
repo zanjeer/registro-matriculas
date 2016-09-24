@@ -74,54 +74,71 @@ class AlumnosController < ApplicationController
     case params[:tipo]
     when "por_curso"
       @titulo = "Reporte Matriculas por Nombre"
-      @template = "reportes/por_curso"
+      @template = "por_curso"
       @lista = Alumno.all
     when "genero"
       @genero = Alumno.group(:genero).count
       @lista = Alumno.all
       @titulo = "Alumnos por Genero"
-      @template = "reportes/matri_por_genero"
+      @template = "matri_por_genero"
       @total = Alumno.all.count
     when "prioritario_genero"
       @tipo = "Prioritario"
       @lista = Alumno.where(subencion: @tipo)
       @titulo = "Alumnos Prioritarios por Genero"
-      @template = "reportes/subencion_por_genero"
+      @template = "subencion_por_genero"
       @total = Alumno.where(subencion: @tipo).count
     when "preferente_genero"
       @tipo = "Preferente"
       @lista = Alumno.where(subencion: @tipo)
       @titulo = "Alumnos Preferente por Genero"
-      @template = "reportes/subencion_por_genero"
+      @template = "subencion_por_genero"
       @total = Alumno.where(subencion: @tipo).count
-    when "numero_hogar"
+    when "numero_personas"
       @titulo = "N° de personas en el hogar"
-      @template = "reportes/numero_hogar"
-      @lista = Alumno.all
+      @template = "numero_personas"
+      @lista = Alumno.where("numero_personas IS NOT NULL")
     when "lista_etnia"
       @titulo = "Alumnos de descendencia indigena"
-      @template = "reportes/etnia"
+      @template = "etnia"
       @lista = Alumno.where(etnia: true)
       @total = Alumno.all.count
     when "tuicion_vivienda"
       @titulo = "Tuicion Vivienda"
-      @template = "reportes/tuicion_vivienda"
-      @lista = Alumno.all
+      @template = "tuicion_vivienda"
+      @lista = Alumno.where("tipo_vivienda IS NOT NULL AND tipo_vivienda != ?","")
     when "religion"
       @titulo = "Preferencia de Religion"
-      @template = "reportes/religion"
-      @lista = Alumno.all
+      @template = "religion"
+      @lista = Alumno.where("religion IS NOT NULL AND religion != ?","")
     when "pre_colegio"
       @titulo = "Colegios de Procedencia"
-      @template = "reportes/pre_colegio"
+      @template = "pre_colegio"
+      @lista = Alumno.where("procedencia IS NOT NULL AND procedencia != ?","")
+    when "edu_padres"
+      @titulo = "Escolaridad Padres"
+      @template = "edu_padres"
       @lista = Alumno.all
+    when "vive_con"
+      @titulo = "Personas con quien Vive el Alumno"
+      @template = "vive_con"
+      @lista = Alumno.where("vive_con IS NOT NULL")
+    when "necesita_alimento"
+      @titulo = "Alumnos que necesitan Alimentacion"
+      @template = "necesita_alimento"
+      @lista = Alumno.where("necesita_alimento IS NOT NULL")
+    when "subsidio_familiar"
+      @titulo = "Alumnos con Subsidio Familiar"
+      @template = "subsidio_familiar"
+      @lista = Alumno.where("subsidio_familiar IS NOT NULL")
     else
+
     end
 
     respond_to do |format|
       format.pdf do
         render pdf: "reporte",
-               template: "#{@template}",
+               template: "reportes/#{@template}",
                javascript_delay: 1000
       end
     end

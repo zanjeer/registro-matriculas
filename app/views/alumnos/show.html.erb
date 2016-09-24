@@ -167,7 +167,7 @@
         <div class="col-md-2">
             <h5><%= @alumno.causa_retiro %></h5>
         </div>
-        <%= link_to 'Eliminar', @alumno, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+
       </div>
       <br>
 
@@ -188,6 +188,14 @@
         </div>
         <div class="col-md-2">
           <%= @alumno.numero_matricula %>
+        </div>
+      </div>
+      <br><br>
+      <hr>
+      <div class="row">
+        <div class="col-md-12 text-center">
+
+          <%= link_to 'Eliminar', @alumno, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </div>
       </div>
     </div>

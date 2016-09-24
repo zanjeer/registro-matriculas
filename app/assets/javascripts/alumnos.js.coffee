@@ -5,6 +5,7 @@
 # funciona after turbolinks
 $(document).on 'turbolinks:load', ->
   # formato RUT y muestra si hay errores
+  $('#alumno_ingreso_familiar').regexMask(/^\d+$/);
   # alumno/_form -> tab ALUMNO
   $('#alumno_rut').Rut
     format: false

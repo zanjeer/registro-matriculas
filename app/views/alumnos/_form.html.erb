@@ -402,7 +402,10 @@
                 <h5>Escolaridad:</h5>
               </div>
               <div class="col-md-8">
-                <%= f.text_field :madre_escolaridad, class: "form-control" %>
+                <%= f.select :madre_escolaridad,[['Sin Educacion'],['Basica Completa'],['Basica Incompleta'],
+                                                ['Media Completa'],['Media Incompleta'],['Tecnica Completa'],
+                                                ['Tecnica Incompleta'],['Superior Completa'],['Superior Incompleta']],
+                                                {:include_blank => true}, class: "form-control" %>
               </div>
             </div>
             <br>
@@ -453,7 +456,10 @@
                 <h5>Escolaridad:</h5>
               </div>
               <div class="col-md-8">
-                <%= f.text_field :padre_escolaridad, class: "form-control" %>
+                <%= f.select :padre_escolaridad,[['Sin Educacion'],['Basica Completa'],['Basica Incompleta'],
+                                                ['Media Completa'],['Media Incompleta'],['Tecnica Completa'],
+                                                ['Tecnica Incompleta'],['Superior Completa'],['Superior Incompleta']],
+                                                {:include_blank => true}, class: "form-control" %>
               </div>
             </div>
             <br>
@@ -501,7 +507,10 @@
                 <h5>Escolaridad:</h5>
               </div>
               <div class="col-md-8">
-                <%= f.text_field :apoderado_escolaridad, class: "form-control" %>
+                <%= f.select :apoderado_escolaridad,[['Sin Educacion'],['Basica Completa'],['Basica Incompleta'],
+                                                ['Media Completa'],['Media Incompleta'],['Tecnica Completa'],
+                                                ['Tecnica Incompleta'],['Superior Completa'],['Superior Incompleta']],
+                                                {:include_blank => true}, class: "form-control" %>
               </div>
             </div>
             <br>

@@ -23,16 +23,13 @@
       <tbody>
         <% @lista.group_by(&:numero_personas).each do |a, alumnos| %>
           <tr>
-            <td>
-              <%= alumnos.count %>
-            </td>
-            <td>
-              <%= a %>
-            </td>
+            <td><%= alumnos.count %></td>
+            <td><%= a %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
 
   </div>
   <div class="col-xs-6">
