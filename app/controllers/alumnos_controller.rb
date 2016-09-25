@@ -151,8 +151,15 @@ class AlumnosController < ApplicationController
       @titulo = "Nivel SocioEconomico Alumnos"
       @template = "nivel_socio_eco_curso"
       @lista = Alumno.all
+    when "pie"
+      @titulo = "Alumnos en Programa PIE"
+      @template = "pie"
+      @lista = Alumno.where("pie IS NOT NULL")
+    when "aprendizaje"
+      @titulo = "Alumnos con Problema de aprendizaje"
+      @template = "aprendizaje"
+      @lista = Alumno.where("problema_aprendizaje IS NOT NULL")
     else
-
     end
 
     respond_to do |format|
@@ -180,7 +187,7 @@ class AlumnosController < ApplicationController
 
     respond_to do |format|
       if @alumno.save
-        format.html { redirect_to @alumno, notice: 'Alumno was successfully created.' }
+        format.html { redirect_to @alumno, notice: 'Alumno Guardado con Exito.' }
         format.json { render :show, status: :created, location: @alumno }
       else
         format.html { render :new }
@@ -194,7 +201,7 @@ class AlumnosController < ApplicationController
   def update
     respond_to do |format|
       if @alumno.update(alumno_params)
-        format.html { redirect_to @alumno, notice: 'Alumno was successfully updated.' }
+        format.html { redirect_to @alumno, notice: 'Alumno Guardado con Exito.' }
         format.json { render :show, status: :ok, location: @alumno }
       else
         format.html { render :edit }
@@ -208,7 +215,7 @@ class AlumnosController < ApplicationController
   def destroy
     @alumno.destroy
     respond_to do |format|
-      format.html { redirect_to alumnos_url, notice: 'Alumno was successfully destroyed.' }
+      format.html { redirect_to alumnos_url, notice: 'Alumno borrado con Exito.' }
       format.json { head :no_content }
     end
   end
@@ -288,7 +295,7 @@ class AlumnosController < ApplicationController
       :apoderado_ocupacion, :apoderado_direccion, :apoderado_escolaridad, :subsidio_familiar,
       :subencion, :sistema_salud, :curso, :fecha_incorp, :problema_aprendizaje,
       :fecha_retiro, :causa_retiro, :ingreso_familiar, :necesita_alimento, :protec_social,
-      :estado, :numero_matricula, :etnia, :religion
+      :estado, :numero_matricula, :etnia, :religion, :pie
       )
     end
 end

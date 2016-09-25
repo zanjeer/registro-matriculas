@@ -128,7 +128,7 @@
         </div>
 
         <div class="col-md-2 text-left">
-          <h5>Subencion:</h5>
+          <h5>Subvencion:</h5>
         </div>
         <div class="col-md-2">
           <%= f.select :subencion, [['Prioritario'], ['Preferente'], ['Solo Regular']],
@@ -163,11 +163,15 @@
           <div class="form-group">
             <div class="checkbox-inline">
               <%= f.check_box :etnia %>
-              <%= f.label :etnia, 'Etnia' %>
+              <%= f.label :etnia, 'Etnia?' %>
             </div>
             <div class="checkbox-inline">
               <%= f.check_box :problema_aprendizaje %>
               <%= f.label :problema_aprendizaje, 'Problema Aprendizaje?' %>
+            </div>
+            <div class="checkbox-inline">
+              <%= f.check_box :pie %>
+              <%= f.label :pie, 'En programa PIE?' %>
             </div>
           </div>
         </div>

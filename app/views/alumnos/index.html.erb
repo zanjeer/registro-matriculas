@@ -77,22 +77,24 @@
   </div>
   <div class="col-md-12">
     <ol>
-      <li><%= link_to 'Lista matricula por Curso', reporte_path(format: :pdf, :tipo => 'por_curso') %></li>
-      <li><%= link_to 'Matricula por genero', reporte_path(format: :pdf, :tipo => 'genero') %>
-        <ul><li><%= link_to 'Alumnos Prioritarios', reporte_path(format: :pdf, :tipo => 'prioritario_genero') %></li></ul>
-        <ul><li><%= link_to 'Alumno Preferentes', reporte_path(format: :pdf, :tipo => 'preferente_genero') %></li></ul>
+      <li><%= link_to 'Lista matricula por Curso', reporte_path(format: :pdf, :tipo => 'por_curso'), :target => "_blank" %></li>
+      <li><%= link_to 'Matricula por genero', reporte_path(format: :pdf, :tipo => 'genero'), :target => "_blank" %>
+        <ul><li><%= link_to 'Alumnos Prioritarios', reporte_path(format: :pdf, :tipo => 'prioritario_genero'), :target => "_blank" %></li></ul>
+        <ul><li><%= link_to 'Alumno Preferentes', reporte_path(format: :pdf, :tipo => 'preferente_genero'), :target => "_blank" %></li></ul>
       </li>
-      <li><%= link_to 'N° personas en el hogar', reporte_path(format: :pdf, :tipo => 'numero_personas') %></li>
-      <li><%= link_to 'Alumnos con descendencia indigena', reporte_path(format: :pdf, :tipo => 'lista_etnia') %></li>
-      <li> <%= link_to 'Tuicion Vivienda', reporte_path(format: :pdf, :tipo => 'tuicion_vivienda') %> </li>
-      <li> <%= link_to 'Preferencia de Religion', reporte_path(format: :pdf, :tipo => 'religion') %> </li>
-      <li> <%= link_to 'Colegios de Procedencia', reporte_path(format: :pdf, :tipo => 'pre_colegio') %> </li>
-      <li> <%= link_to 'Escolaridad Padres', reporte_path(format: :pdf, :tipo => 'edu_padres') %> </li>
-      <li> <%= link_to 'Personas con quien vive', reporte_path(format: :pdf, :tipo => 'vive_con') %> </li>
-      <li> <%= link_to 'Alumnos con Necesidad de Alimentacion', reporte_path(format: :pdf, :tipo => 'necesita_alimento') %> </li>
-      <li> <%= link_to 'Alumnos con Subsidio Familiar', reporte_path(format: :pdf, :tipo => 'subsidio_familiar') %> </li>
-      <li> <%= link_to 'Nivel SocioEconomico Alumnos', reporte_path(format: :pdf, :tipo => 'nivel_socio_eco') %> </li>
-      <li> <%= link_to 'Nivel SocioEconomico Alumnos por Curso', reporte_path(format: :pdf, :tipo => 'nivel_socio_eco_curso') %> </li>
+      <li><%= link_to 'N° personas en el hogar', reporte_path(format: :pdf, :tipo => 'numero_personas'), :target => "_blank" %></li>
+      <li><%= link_to 'Alumnos con descendencia indigena', reporte_path(format: :pdf, :tipo => 'lista_etnia'), :target => "_blank" %></li>
+      <li> <%= link_to 'Tuicion Vivienda', reporte_path(format: :pdf, :tipo => 'tuicion_vivienda'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Preferencia de Religion', reporte_path(format: :pdf, :tipo => 'religion'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Colegios de Procedencia', reporte_path(format: :pdf, :tipo => 'pre_colegio'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Escolaridad Padres', reporte_path(format: :pdf, :tipo => 'edu_padres'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Personas con quien vive', reporte_path(format: :pdf, :tipo => 'vive_con'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Alumnos con Necesidad de Alimentacion', reporte_path(format: :pdf, :tipo => 'necesita_alimento'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Alumnos con Subsidio Familiar', reporte_path(format: :pdf, :tipo => 'subsidio_familiar'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Nivel SocioEconomico Alumnos', reporte_path(format: :pdf, :tipo => 'nivel_socio_eco'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Nivel SocioEconomico Alumnos por Curso', reporte_path(format: :pdf, :tipo => 'nivel_socio_eco_curso'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Alumnos en Programa PIE', reporte_path(format: :pdf, :tipo => 'pie'), :target => "_blank" %> </li>
+      <li> <%= link_to 'Alumnos con Problema de Aprendizaje', reporte_path(format: :pdf, :tipo => 'aprendizaje'), :target => "_blank" %> </li>
     </ol>
     <br>
     <br>

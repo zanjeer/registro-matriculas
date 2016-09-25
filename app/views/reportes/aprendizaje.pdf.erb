@@ -1,0 +1,65 @@
+<%= wicked_pdf_stylesheet_link_tag "reportes" %>
+<%= javascript_include_tag "https://www.google.com/jsapi" %>
+<%= wicked_pdf_javascript_include_tag "chartkick" %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<div class="container">
+  <div class="row">
+    <div style="text-align: center;">
+      <h3><b><%= @titulo %></b></h3>
+    </div>
+    <br><br>
+  </div>
+
+<div class="row">
+
+  <div class="col-xs-6">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Numero Alumnos</th>
+        <th>Problema Aprendizaje?</th>
+      </tr>
+
+      <tbody>
+        <% @lista.group_by(&:problema_aprendizaje).each do |ali, alumnos| %>
+          <tr>
+
+            <td><%= alumnos.count %></td>
+            <td><%= ali %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-xs-6">
+    <h4>Problema de Aprendizaje?:</h4>
+    <%= pie_chart @lista.group(:problema_aprendizaje).count,
+    width: "500px", height: "200px",
+    label: "Value"
+    %>
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <th>Nombre</th>
+      <th>Rut</th>
+      <th>Genero</th>
+      <th>Curso</th>
+    </thead>
+    <tbody>
+      <% @lista.where(problema_aprendizaje: true).order(:paterno).each do |a|%>
+
+        <tr>
+          <td><%= a.nombre_completo_formal %></td>
+          <td><%= a.rut %></td>
+          <td><%= a.genero %></td>
+          <td><%= a.curso %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+</div>
