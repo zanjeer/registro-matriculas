@@ -131,6 +131,26 @@ class AlumnosController < ApplicationController
       @titulo = "Alumnos con Subsidio Familiar"
       @template = "subsidio_familiar"
       @lista = Alumno.where("subsidio_familiar IS NOT NULL")
+    when "nivel_socio_eco"
+      @titulo = "Nivel SocioEconomico Alumnos"
+      @template = "nivel_socio_eco"
+      @deciles = {
+        "1° Decil" => {"min"=> '0', "max" => '48750'},
+        "2° Decil" => {"min"=> '48751', "max" => '74969'},
+        "3° Decil" => {"min"=> '74970', "max" => '100709'},
+        "4° Decil" => {"min"=> '100710', "max" => '125558'},
+        "5° Decil" => {"min"=> '125559', "max" => '154166'},
+        "6° Decil" => {"min"=> '154167', "max" => '193104'},
+        "7° Decil" => {"min"=> '193105', "max" => '250663'},
+        "8° Decil" => {"min"=> '250664', "max" => '325743'},
+        "9° Decil" => {"min"=> '352744', "max" => '611728'},
+        "10° Decil" => {"min"=> '611729', "max" => '9999999'},
+      }
+      @lista = Alumno.where("ingreso_familiar IS NOT NULL")
+    when "nivel_socio_eco_curso"
+      @titulo = "Nivel SocioEconomico Alumnos"
+      @template = "nivel_socio_eco_curso"
+      @lista = Alumno.all
     else
 
     end

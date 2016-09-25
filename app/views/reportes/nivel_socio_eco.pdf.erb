@@ -1,0 +1,46 @@
+<%= wicked_pdf_stylesheet_link_tag "reportes" %>
+<%= javascript_include_tag "https://www.google.com/jsapi" %>
+<%= wicked_pdf_javascript_include_tag "chartkick" %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<div class="container">
+  <div class="row">
+    <div style="text-align: center;">
+      <h3><b><%= @titulo %></b></h3>
+    </div>
+    <br><br>
+  </div>
+
+<% @deciles.each do |decil, rango|
+    min = rango['min']
+    max = rango['max']
+%>
+  <div class="row">
+    <h4> <%= "#{decil}: $#{min} - $#{max}" %> </h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <th>Nombre</th>
+        <th>Rut</th>
+        <th>Genero</th>
+        <th>Curso</th>
+      </thead>
+      <tbody>
+        <% @lista.where("ingreso_familiar >= ? AND ingreso_familiar <= ?", min, max)
+                .order(:paterno).each do |a|%>
+          <tr>
+            <td><%= a.nombre_completo_formal %></td>
+            <td><%= a.rut %></td>
+            <td><%= a.genero %></td>
+            <td><%= a.curso %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div style="page-break-after: always;"></div>
+  </div>
+
+<% end %>
+
+
+
+</div>
