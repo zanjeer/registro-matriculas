@@ -1,0 +1,69 @@
+<%= wicked_pdf_stylesheet_link_tag "reportes" %>
+<%= javascript_include_tag "https://www.google.com/jsapi" %>
+<%= wicked_pdf_javascript_include_tag "chartkick" %>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<div class="container">
+  <div class="row">
+    <div style="text-align: center;">
+      <h3><b><%= @titulo %></b></h3>
+    </div>
+    <br><br>
+  </div>
+
+<div class="row">
+
+  <div class="col-xs-6">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Ocupacion</th>
+        <th>Numero Madres</th>
+      </tr>
+      <tbody>
+        <% @lista_madre.group_by(&:madre_ocupacion).each do |ocupacion,alum| %>
+          <tr>
+            <td><%= ocupacion %></td>
+            <td><%= alum.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-xs-6">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Ocupacion</th>
+        <th>Numero Padres</th>
+      </tr>
+      <tbody>
+        <% @lista_padre.group_by(&:padre_ocupacion).each do |ocupacion,alum| %>
+          <tr>
+            <td><%= ocupacion %></td>
+            <td><%= alum.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <h4>Ocupacion Madres:</h4>
+    <%= pie_chart @lista_madre.group(:madre_ocupacion).count,
+    width: "500px", height: "200px",
+    label: "Value"
+    %>
+  </div>
+  <div class="col-xs-6">
+    <h4>Ocupacion Padres:</h4>
+    <%= pie_chart @lista_padre.group(:padre_ocupacion).count,
+    width: "500px", height: "200px",
+    label: "Value"
+    %>
+  </div>
+</div>
+
+</div>

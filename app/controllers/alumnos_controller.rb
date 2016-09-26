@@ -159,6 +159,11 @@ class AlumnosController < ApplicationController
       @titulo = "Alumnos con Problema de aprendizaje"
       @template = "aprendizaje"
       @lista = Alumno.where("problema_aprendizaje IS NOT NULL")
+    when "ocupaciones"
+      @titulo = "Lista Ocupaciones"
+      @template = "ocupaciones"
+      @lista_padre = Alumno.where("padre_ocupacion IS NOT NULL AND padre_ocupacion != ?","")
+      @lista_madre = Alumno.where("madre_ocupacion IS NOT NULL AND madre_ocupacion != ?", "")
     else
     end
 
