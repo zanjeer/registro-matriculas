@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925222433) do
+ActiveRecord::Schema.define(version: 20160927161524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,10 +68,10 @@ ActiveRecord::Schema.define(version: 20160925222433) do
     t.integer  "numero_matricula"
     t.boolean  "necesita_alimento",     default: false,    null: false
     t.boolean  "protec_social",         default: false,    null: false
-    t.boolean  "etnia",                 default: false,    null: false
     t.boolean  "problema_aprendizaje",  default: false,    null: false
     t.string   "religion"
     t.boolean  "pie"
+    t.string   "etnia"
   end
 
   add_index "alumnos", ["rut"], name: "index_alumnos_on_rut", using: :btree

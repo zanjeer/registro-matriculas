@@ -159,12 +159,21 @@
       </div>
       <br>
       <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <h5>Etnia:</h5>
+        </div>
+
+        <div class="col-md-2">
+          <%= f.select :etnia, [['No'],['Si'],['Aimara'],['Rapa Nui'],['Quechua'],
+                                ['Mapuche'],['Atacameña'],['Colla'],['Alacalufe O Kawashkar'],
+                                ['Yagán O Yámara'],['Diaguita']],{}, {class: "form-control"} %>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
         <div class="col-md-6 col-md-offset-1 text-left">
           <div class="form-group">
-            <div class="checkbox-inline">
-              <%= f.check_box :etnia %>
-              <%= f.label :etnia, 'Etnia?' %>
-            </div>
             <div class="checkbox-inline">
               <%= f.check_box :problema_aprendizaje %>
               <%= f.label :problema_aprendizaje, 'Problema Aprendizaje?' %>
@@ -397,7 +406,12 @@
                 <h5>Ocupacion:</h5>
               </div>
               <div class="col-md-8">
-                <%= f.text_field :madre_ocupacion, class: "form-control" %>
+                <%= f.select :madre_ocupacion, [['Cesante'],['Empleador o Patron'],['Trabajador por cuenta propia'],
+                                                ['Asalariado sector Privado'],['Asalariado sector publico'],
+                                                ['Servicio Domestico Puertas Adentro'],['Servicio Domestico Puertas Afuera'],
+                                                ['Trabajo Familiar No remunerado'],['Jubilado o Pensionado'],['Dueña de casa'],
+                                                ['Estudiante'],['No sabe o no Aplica']],{:include_blank => true},
+                                                class: "form-control" %>
               </div>
             </div>
             <br>
@@ -451,7 +465,12 @@
                 <h5>Ocupacion:</h5>
               </div>
               <div class="col-md-8">
-                <%= f.text_field :padre_ocupacion, class: "form-control" %>
+                <%= f.select :padre_ocupacion, [['Cesante'],['Empleador o Patron'],['Trabajador por cuenta propia'],
+                                                ['Asalariado sector Privado'],['Asalariado sector publico'],
+                                                ['Servicio Domestico Puertas Adentro'],['Servicio Domestico Puertas Afuera'],
+                                                ['Trabajo Familiar No remunerado'],['Jubilado o Pensionado'],['Dueña de casa'],
+                                                ['Estudiante'],['No sabe o no Aplica']],{:include_blank => true},
+                                                class: "form-control" %>
               </div>
             </div>
             <br>
@@ -502,7 +521,12 @@
                 <h5>Ocupacion:</h5>
               </div>
               <div class="col-md-8">
-                <%= f.text_field :apoderado_ocupacion, class: "form-control" %>
+                <%= f.select :apoderado_ocupacion, [['Cesante'],['Empleador o Patron'],['Trabajador por cuenta propia'],
+                                                ['Asalariado sector Privado'],['Asalariado sector publico'],
+                                                ['Servicio Domestico Puertas Adentro'],['Servicio Domestico Puertas Afuera'],
+                                                ['Trabajo Familiar No remunerado'],['Jubilado o Pensionado'],['Dueña de casa'],
+                                                ['Estudiante'],['No sabe o no Aplica']],{:include_blank => true},
+                                                class: "form-control" %>
               </div>
             </div>
             <br>

@@ -101,7 +101,7 @@ class AlumnosController < ApplicationController
     when "lista_etnia"
       @titulo = "Alumnos de descendencia indigena"
       @template = "etnia"
-      @lista = Alumno.where(etnia: true)
+      @lista = Alumno.where("etnia != 'No'")
       @total = Alumno.all.count
     when "tuicion_vivienda"
       @titulo = "Tuicion Vivienda"
@@ -118,7 +118,8 @@ class AlumnosController < ApplicationController
     when "edu_padres"
       @titulo = "Escolaridad Padres"
       @template = "edu_padres"
-      @lista = Alumno.all
+      @lista_padre = Alumno.where("padre_escolaridad IS NOT NULL AND padre_escolaridad != ?","")
+      @lista_madre = Alumno.where("madre_escolaridad IS NOT NULL AND madre_escolaridad != ?","")
     when "vive_con"
       @titulo = "Personas con quien Vive el Alumno"
       @template = "vive_con"
@@ -233,9 +234,9 @@ class AlumnosController < ApplicationController
       if alumno['genero'].downcase == "f"
         genero = "Femenino"
       end
-      etnia = false
+      etnia = "No"
       if alumno['codigo_etnia'] != "0"
-        etnia = true
+        etnia = "Si"
       end
 
       # formato: 12345678-k
