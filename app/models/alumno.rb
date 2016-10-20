@@ -4,8 +4,8 @@ class Alumno < ActiveRecord::Base
   validates :madre_rut, :padre_rut, :apoderado_rut, rut: true
 
   scope :nombre_like, -> (query) {
-                    where("CONCAT_WS(' ', nombres, paterno, materno, curso) LIKE :s OR
-                          rut LIKE :s ",s: "%#{query}%" )}
+                    where("upper(CONCAT_WS(' ', nombres, paterno, materno, curso)) LIKE :s OR
+                          rut LIKE :s",s: "#{query}" )}
 
   def nombre_completo
    "#{nombres.upcase}  #{paterno.upcase} #{materno.upcase}"

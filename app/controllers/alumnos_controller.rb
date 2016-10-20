@@ -46,6 +46,9 @@ class AlumnosController < ApplicationController
   # GET /alumnos
   # GET /alumnos.json
   def index
+    # path  a la busqueda realizada
+    session[:return_to] = request.fullpath
+
     @alumnos = Alumno.all.order('id')
     if params[:input_buscar]
       @alumnos = Alumno.nombre_like("%#{params[:input_buscar].gsub(' ', '%').upcase}%").order('nombres')
@@ -59,8 +62,6 @@ class AlumnosController < ApplicationController
     render json: result.map { |alumno| {alumno: alumno.id,
                               label: "#{alumno.rut} - #{alumno.nombre_completo} - #{alumno.curso}",
                               value: alumno.rut,
-                              nombre: alumno.nombre_completo, rut: alumno.rut,
-                              fono: alumno.telefono,
                             }}
   end
 
